@@ -564,6 +564,61 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>GAME</GroupName>
+          <Files>
+            <File>
+              <FileName>general_utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\GAME\general_utils.c</FilePath>
+            </File>
+            <File>
+              <FileName>general_utils.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\GAME\general_utils.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>joystick</GroupName>
+          <Files>
+            <File>
+              <FileName>funct_joystick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\joystick\funct_joystick.c</FilePath>
+            </File>
+            <File>
+              <FileName>joystick.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\joystick\joystick.h</FilePath>
+            </File>
+            <File>
+              <FileName>lib_joystick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\joystick\lib_joystick.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>RIT</GroupName>
+          <Files>
+            <File>
+              <FileName>IRQ_RIT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\RIT\IRQ_RIT.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_RIT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\RIT\lib_RIT.c</FilePath>
+            </File>
+            <File>
+              <FileName>RIT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\RIT\RIT.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
@@ -1122,6 +1177,61 @@
               <FileName>mpu_armv7.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Source\CMSIS_core\mpu_armv7.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>GAME</GroupName>
+          <Files>
+            <File>
+              <FileName>general_utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\GAME\general_utils.c</FilePath>
+            </File>
+            <File>
+              <FileName>general_utils.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\GAME\general_utils.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>joystick</GroupName>
+          <Files>
+            <File>
+              <FileName>funct_joystick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\joystick\funct_joystick.c</FilePath>
+            </File>
+            <File>
+              <FileName>joystick.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\joystick\joystick.h</FilePath>
+            </File>
+            <File>
+              <FileName>lib_joystick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\joystick\lib_joystick.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>RIT</GroupName>
+          <Files>
+            <File>
+              <FileName>IRQ_RIT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\RIT\IRQ_RIT.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_RIT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\RIT\lib_RIT.c</FilePath>
+            </File>
+            <File>
+              <FileName>RIT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\RIT\RIT.h</FilePath>
             </File>
           </Files>
         </Group>
