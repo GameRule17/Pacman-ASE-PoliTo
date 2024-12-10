@@ -32,15 +32,15 @@ void LCD_DrawCircle(uint16_t xc, uint16_t yc, uint16_t r, uint16_t color) {
     int d = 3 - 2 * r; // Decision parameter
 
     while (x <= y) {
-        // Disegna i punti simmetrici nei 4 quadranti
-        LCD_SetPoint(xc + x, yc + y, color); // Quadrante 1
-        LCD_SetPoint(xc - x, yc + y, color); // Quadrante 2
-        LCD_SetPoint(xc + x, yc - y, color); // Quadrante 3
-        LCD_SetPoint(xc - x, yc - y, color); // Quadrante 4
-        LCD_SetPoint(xc + y, yc + x, color); // Quadrante 5
-        LCD_SetPoint(xc - y, yc + x, color); // Quadrante 6
-        LCD_SetPoint(xc + y, yc - x, color); // Quadrante 7
-        LCD_SetPoint(xc - y, yc - x, color); // Quadrante 8
+        // Point drawing
+        LCD_SetPoint(xc + x, yc + y, color); 
+        LCD_SetPoint(xc - x, yc + y, color); 
+        LCD_SetPoint(xc + x, yc - y, color); 
+        LCD_SetPoint(xc - x, yc - y, color); 
+        LCD_SetPoint(xc + y, yc + x, color); 
+        LCD_SetPoint(xc - y, yc + x, color); 
+        LCD_SetPoint(xc + y, yc - x, color); 
+        LCD_SetPoint(xc - y, yc - x, color); 
 
         if (d < 0) {
             d = d + 4 * x + 6;
@@ -58,11 +58,11 @@ void LCD_FillCircle(uint16_t xc, uint16_t yc, uint16_t r, uint16_t color) {
     int d = 3 - 2 * r; // Decision parameter
 
     while (x <= y) {
-        // Disegna linee orizzontali tra i punti simmetrici
-        LCD_DrawLine(xc - x, yc + y, xc + x, yc + y, color); // Linea sopra
-        LCD_DrawLine(xc - x, yc - y, xc + x, yc - y, color); // Linea sotto
-        LCD_DrawLine(xc - y, yc + x, xc + y, yc + x, color); // Linea orizzontale sopra
-        LCD_DrawLine(xc - y, yc - x, xc + y, yc - x, color); // Linea orizzontale sotto
+        // Draw lines through symetric points
+        LCD_DrawLine(xc - x, yc + y, xc + x, yc + y, color); 
+        LCD_DrawLine(xc - x, yc - y, xc + x, yc - y, color); 
+        LCD_DrawLine(xc - y, yc + x, xc + y, yc + x, color); 
+        LCD_DrawLine(xc - y, yc - x, xc + y, yc - x, color);
 
         if (d < 0) {
             d = d + 4 * x + 6;

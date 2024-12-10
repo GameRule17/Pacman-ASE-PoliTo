@@ -45,18 +45,22 @@ int main(void)
 	
   LCD_Initialization();
   TP_Init();
-	//TouchPanel_Calibrate(); // Fondamentale quando si utilizza la scheda reale
-													  // PER L'EMULATORE NON SERVE
+	TouchPanel_Calibrate(); // To usalize when using the phisical board
+	
+	LPC_SC -> PCONP |= (1 << 22); // Power on TIMER2
+	LPC_SC -> PCONP |= (1 << 23); // Power on TIMER3
+	
+	// CODE STARTS HERE
 	
 	LCD_Clear(Black);
 	//GUI_Text(0, 280, (uint8_t *) " touch here : 1 sec to clear  ", Red, White);
 	Board_Init();
 
-	// Timer0 usato per leggere il punto premuto sul display
+	// In this example Timer0 is used with the only MR0!
 	init_timer(0, 0xC8);   	  					    /* 8us * 25MHz = 200 ~= 0xC8           */
 	enable_timer(0);
 	
-	LPC_SC->PCON |= 0x1;									/* power-down	mode										*/
+	LPC_SC->PCON |= 0x1;									  /* power-down	mode										 */
 	LPC_SC->PCON &= ~(0x2);						
 	
   while (1)	

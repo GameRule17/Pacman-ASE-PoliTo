@@ -21,11 +21,11 @@
 **
 ******************************************************************************/
 
-// Gestione del de bouncing per i 3 pulsanti
+// Handling de-bouncing for the 3 keys
 volatile int down_0 = 0;
 volatile int down_1 = 0;
 volatile int down_2 = 0;
-// fine gestione de bouncing
+// End de-bouncing handle
 
 void RIT_IRQHandler (void)
 {			
