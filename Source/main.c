@@ -20,53 +20,109 @@
 **
 *********************************************************************************************************/
 
-/* Includes ------------------------------------------------------------------*/
-#include "LPC17xx.h"
-#include "GLCD/GLCD.h" 
-#include "TouchPanel/TouchPanel.h"
-#include "timer/timer.h"
-#include "GAME/general_utils.h"
-#include "RIT/RIT.h"
 
+
+	/* System Defines */
+	
+#include "LPC17xx.h"
 
 #ifdef SIMULATOR
 extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emulator to find the symbol (can be placed also inside system_LPC17xx.h but since it is RO, it needs more work)
+//int const is_simulator = 1;
 #endif
 
 
+	/* Hardware Imports */
+
+#include "GLCD/GLCD.h" 
+#include "TouchPanel/TouchPanel.h"
+#include "led/led.h"
+#include "timer/timer.h"
+
+
+	/* User Imports */
+#include "GAME/drawing_func.h"
+	
+	
+
 int main(void)
 {
-  SystemInit();  												/* System Initialization (i.e., PLL)  */
+	/* Area Init */
 	
+	// System
+	SystemInit();
+	
+	// Display
+	LCD_Initialization();
+	LCD_Clear(Black);
+	
+	// TouchScreen
+	//TP_Init();
+	//if (!is_simulator)
+	//	TouchPanel_Calibrate();
+	
+	// Led
+	//LED_init();
+	
+	// Buttons
+	BUTTON_init();
+	
+	// Joystick
 	joystick_init();
 	
-	init_RIT(0x004C4B40);									/* RIT Initialization 50 msec       */
-	enable_RIT();													/* enable RIT to count 50ms			 	  */
+	// RIT
+	init_RIT(0x004C4B40);					// 50ms
+	enable_RIT();
 	
-  LCD_Initialization();
-  TP_Init();
-	TouchPanel_Calibrate(); // To usalize when using the phisical board
+	// Timers
+	LPC_SC -> PCONP |= (1 << 22);  			// Turn ON TIMER2 (anche da Wizard del System)
+	LPC_SC -> PCONP |= (1 << 23);  			// Turn ON TIMER3 (anche da Wizard del System)
 	
-	LPC_SC -> PCONP |= (1 << 22); // Power on TIMER2
-	LPC_SC -> PCONP |= (1 << 23); // Power on TIMER3
+	// ADC
+	//ADC_init();
 	
-	// CODE STARTS HERE
 	
-	LCD_Clear(Black);
-	//GUI_Text(0, 280, (uint8_t *) " touch here : 1 sec to clear  ", Red, White);
-	Board_Init();
-
-	// In this example Timer0 is used with the only MR0!
-	init_timer(0, 0xC8);   	  					    /* 8us * 25MHz = 200 ~= 0xC8           */
-	enable_timer(0);
+	/* Area Timers */
 	
-	LPC_SC->PCON |= 0x1;									  /* power-down	mode										 */
+	// t * f = count
+	// f = 25Mhz	=> 25'000'000 Hz
+	// t = richiesta del problema
+	
+	//init_timer(timer_num, Prescaler, MatchReg, SRImatchReg, TimerInterval);
+	
+		//TIMER0
+	//init_timer(0, 0, 0, 3, 0x);
+	//enable_timer(0);
+	
+		//TIMER1
+	//init_timer(1, 0, 0, 3, 0x);
+	//enable_timer(1);
+	
+		//TIMER2
+	//init_timer(2, 0, 0, 3, 0x);
+	//enable_timer(2);
+	
+		//TIMER3
+	//init_timer(3, 0, 0, 3, 0x);
+	//enable_timer(3);
+	
+	
+	/* Area Code */
+	Draw_Matrix();
+	
+	
+	
+	
+	
+	/* Area Loop */
+	
+	LPC_SC->PCON |= 0x1;					/* power-down mode */
 	LPC_SC->PCON &= ~(0x2);						
 	
-  while (1)	
-  {
+	while (1) {
 		__ASM("wfi");
-  }
+	}
+	
 }
 
 /*********************************************************************************************************

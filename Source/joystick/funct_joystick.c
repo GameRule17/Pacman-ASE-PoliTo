@@ -10,11 +10,19 @@
 
 #include "LPC17xx.h"
 #include "joystick.h"
+#include "../led/led.h"
+
+
+extern int J_up;
+extern int J_down;
+extern int J_right;
+extern int J_left;
+extern int J_click;
 
 
 /*----------------------------------------------------------------------------
   Function that turns on requested led
  *----------------------------------------------------------------------------*/
 void joystick_On(unsigned int num) {
-	//LED_Out(num);
+	LED_Out(num);
 }

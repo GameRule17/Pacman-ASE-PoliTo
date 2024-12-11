@@ -396,9 +396,9 @@
           <GroupName>main</GroupName>
           <Files>
             <File>
-              <FileName>sample.c</FileName>
+              <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Source\sample.c</FilePath>
+              <FilePath>.\Source\main.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -449,6 +449,57 @@
               <FileName>GLCD.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\GLCD\GLCD.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>2</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>1</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <uGnu>2</uGnu>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
             </File>
             <File>
               <FileName>GLCD.h</FileName>
@@ -564,17 +615,62 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>GAME</GroupName>
+          <GroupName>led</GroupName>
           <Files>
             <File>
-              <FileName>general_utils.c</FileName>
+              <FileName>funct_led.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Source\GAME\general_utils.c</FilePath>
+              <FilePath>.\Source\led\funct_led.c</FilePath>
             </File>
             <File>
-              <FileName>general_utils.h</FileName>
+              <FileName>lib_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\led\lib_led.c</FilePath>
+            </File>
+            <File>
+              <FileName>led.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Source\GAME\general_utils.h</FilePath>
+              <FilePath>.\Source\led\led.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>button_EXINT</GroupName>
+          <Files>
+            <File>
+              <FileName>button.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\button_EXINT\button.h</FilePath>
+            </File>
+            <File>
+              <FileName>IRQ_button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\button_EXINT\IRQ_button.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\button_EXINT\lib_button.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>RIT</GroupName>
+          <Files>
+            <File>
+              <FileName>IRQ_RIT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\RIT\IRQ_RIT.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_RIT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\RIT\lib_RIT.c</FilePath>
+            </File>
+            <File>
+              <FileName>RIT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\RIT\RIT.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -599,22 +695,42 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>RIT</GroupName>
+          <GroupName>adc</GroupName>
           <Files>
             <File>
-              <FileName>IRQ_RIT.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\RIT\IRQ_RIT.c</FilePath>
-            </File>
-            <File>
-              <FileName>lib_RIT.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\RIT\lib_RIT.c</FilePath>
-            </File>
-            <File>
-              <FileName>RIT.h</FileName>
+              <FileName>adc.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Source\RIT\RIT.h</FilePath>
+              <FilePath>.\Source\adc\adc.h</FilePath>
+            </File>
+            <File>
+              <FileName>IRQ_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\adc\IRQ_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\adc\lib_adc.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>GAME</GroupName>
+          <Files>
+            <File>
+              <FileName>drawing_func.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\GAME\drawing_func.c</FilePath>
+            </File>
+            <File>
+              <FileName>drawing_func.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\GAME\drawing_func.h</FilePath>
+            </File>
+            <File>
+              <FileName>game_matrix.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\GAME\game_matrix.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1013,9 +1129,9 @@
           <GroupName>main</GroupName>
           <Files>
             <File>
-              <FileName>sample.c</FileName>
+              <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Source\sample.c</FilePath>
+              <FilePath>.\Source\main.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1181,17 +1297,62 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>GAME</GroupName>
+          <GroupName>led</GroupName>
           <Files>
             <File>
-              <FileName>general_utils.c</FileName>
+              <FileName>funct_led.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Source\GAME\general_utils.c</FilePath>
+              <FilePath>.\Source\led\funct_led.c</FilePath>
             </File>
             <File>
-              <FileName>general_utils.h</FileName>
+              <FileName>lib_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\led\lib_led.c</FilePath>
+            </File>
+            <File>
+              <FileName>led.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Source\GAME\general_utils.h</FilePath>
+              <FilePath>.\Source\led\led.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>button_EXINT</GroupName>
+          <Files>
+            <File>
+              <FileName>button.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\button_EXINT\button.h</FilePath>
+            </File>
+            <File>
+              <FileName>IRQ_button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\button_EXINT\IRQ_button.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\button_EXINT\lib_button.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>RIT</GroupName>
+          <Files>
+            <File>
+              <FileName>IRQ_RIT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\RIT\IRQ_RIT.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_RIT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\RIT\lib_RIT.c</FilePath>
+            </File>
+            <File>
+              <FileName>RIT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\RIT\RIT.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1216,22 +1377,42 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>RIT</GroupName>
+          <GroupName>adc</GroupName>
           <Files>
             <File>
-              <FileName>IRQ_RIT.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\RIT\IRQ_RIT.c</FilePath>
-            </File>
-            <File>
-              <FileName>lib_RIT.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\RIT\lib_RIT.c</FilePath>
-            </File>
-            <File>
-              <FileName>RIT.h</FileName>
+              <FileName>adc.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Source\RIT\RIT.h</FilePath>
+              <FilePath>.\Source\adc\adc.h</FilePath>
+            </File>
+            <File>
+              <FileName>IRQ_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\adc\IRQ_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\adc\lib_adc.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>GAME</GroupName>
+          <Files>
+            <File>
+              <FileName>drawing_func.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\GAME\drawing_func.c</FilePath>
+            </File>
+            <File>
+              <FileName>drawing_func.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\GAME\drawing_func.h</FilePath>
+            </File>
+            <File>
+              <FileName>game_matrix.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\GAME\game_matrix.h</FilePath>
             </File>
           </Files>
         </Group>

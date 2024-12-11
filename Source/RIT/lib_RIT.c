@@ -21,8 +21,8 @@
 ******************************************************************************/
 void enable_RIT( void )
 {
-  LPC_RIT->RICTRL |= (1<<3);	
-  return;
+	LPC_RIT->RICTRL |= (1<<3);	
+	return;
 }
 
 /******************************************************************************
@@ -37,7 +37,7 @@ void enable_RIT( void )
 void disable_RIT( void )
 {
 	LPC_RIT->RICTRL &= ~(1<<3);	
-  return;
+	return;
 }
 
 /******************************************************************************
@@ -51,16 +51,14 @@ void disable_RIT( void )
 ******************************************************************************/
 void reset_RIT( void )
 {
-  LPC_RIT->RICOUNTER = 0;          // Set count value to 0
-  return;
+	LPC_RIT->RICOUNTER = 0;          // Set count value to 0
+	return;
 }
 
 uint32_t init_RIT ( uint32_t RITInterval )
 {
-  
-	
-  LPC_SC->PCLKSEL1  &= ~(3<<26);
-  LPC_SC->PCLKSEL1  |=  (1<<26);   // RIT Clock = CCLK
+	LPC_SC->PCLKSEL1  &= ~(3<<26);
+	LPC_SC->PCLKSEL1  |=  (1<<26);   // RIT Clock = CCLK
 	LPC_SC->PCONP     |=  (1<<16);   // Enable power for RIT
 	
 	LPC_RIT->RICOMPVAL = RITInterval;      // Set match value		
@@ -69,7 +67,7 @@ uint32_t init_RIT ( uint32_t RITInterval )
 	LPC_RIT->RICOUNTER = 0;          // Set count value to 0
 	
 	NVIC_EnableIRQ(RIT_IRQn);
-  return (0);
+	return (0);
 }
 
 /******************************************************************************
