@@ -732,6 +732,21 @@
               <FileType>5</FileType>
               <FilePath>.\Source\GAME\game_matrix.h</FilePath>
             </File>
+            <File>
+              <FileName>moving_func.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\GAME\moving_func.c</FilePath>
+            </File>
+            <File>
+              <FileName>moving_func.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\GAME\moving_func.h</FilePath>
+            </File>
+            <File>
+              <FileName>game_matrix.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\GAME\game_matrix.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1413,6 +1428,21 @@
               <FileName>game_matrix.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Source\GAME\game_matrix.h</FilePath>
+            </File>
+            <File>
+              <FileName>moving_func.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\GAME\moving_func.c</FilePath>
+            </File>
+            <File>
+              <FileName>moving_func.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\GAME\moving_func.h</FilePath>
+            </File>
+            <File>
+              <FileName>game_matrix.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\GAME\game_matrix.c</FilePath>
             </File>
           </Files>
         </Group>

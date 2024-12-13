@@ -10,6 +10,7 @@
 #include "LPC17xx.h"
 #include "RIT.h"
 #include "../led/led.h"
+#include "GAME/moving_func.h"
 
 	/* Variabili Globali Gestione De-Bouncing */
 	
@@ -23,11 +24,7 @@ volatile int J_right = 0;
 volatile int J_left = 0;
 volatile int J_click = 0;
 
-
 	/* Variabili Globali */
-	
-int const long_press_count_1 = 99;		// => count = x / 50ms ; where x = time long press
-//int const long_press_count_2 = 0;
 
 
 /******************************************************************************
@@ -49,9 +46,6 @@ void RIT_IRQHandler(void)
 				case 2:
 					// your code here
 					break;
-				case long_press_count_1:
-					// your code here (for long press)
-					break;
 				default:
 					break;
 			}
@@ -71,9 +65,6 @@ void RIT_IRQHandler(void)
 			switch(down_1){
 				case 2:
 					// your code here
-					break;
-				case long_press_count_1:
-					// your code here (for long press)
 					break;
 				default:
 					break;
@@ -95,9 +86,6 @@ void RIT_IRQHandler(void)
 				case 2:
 					// your code here
 					break;
-				case long_press_count_1:
-					// your code here (for long press)
-					break;
 				default:
 					break;
 			}
@@ -117,9 +105,7 @@ void RIT_IRQHandler(void)
 		switch(J_up){
 			case 1:
 				// your code here
-				break;
-			case long_press_count_1:
-				// your code here (for long press)
+				movePacman(J_UP_KEY); // 1 = UP MOVE			
 				break;
 			default:
 				// potential other code here
@@ -138,9 +124,7 @@ void RIT_IRQHandler(void)
 		switch(J_down){
 			case 1:
 				// your code here
-				break;
-			case long_press_count_1:
-				// your code here (for long press)
+				movePacman(J_DOWN_KEY); // 2 = DOWN MOVE
 				break;
 			default:
 				// potential other code here
@@ -159,9 +143,7 @@ void RIT_IRQHandler(void)
 		switch(J_right){
 			case 1:
 				// your code here
-				break;
-			case long_press_count_1:
-				// your code here (for long press)
+				movePacman(J_RIGHT_KEY); // 4 = RIGHT MOVE
 				break;
 			default:
 				// potential other code here
@@ -180,9 +162,7 @@ void RIT_IRQHandler(void)
 		switch(J_left){
 			case 1:
 				// your code here
-				break;
-			case long_press_count_1:
-				// your code here (for long press)
+				movePacman(J_LEFT_KEY); // 3 = LEFT MOVE
 				break;
 			default:
 				// potential other code here
@@ -201,9 +181,6 @@ void RIT_IRQHandler(void)
 		switch(J_click){
 			case 1:
 				// your code here
-				break;
-			case long_press_count_1:
-				// your code here (for long press)
 				break;
 			default:
 				// potential other code here

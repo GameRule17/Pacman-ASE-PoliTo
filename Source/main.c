@@ -43,8 +43,6 @@ extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emul
 	/* User Imports */
 #include "GAME/drawing_func.h"
 	
-	
-
 int main(void)
 {
 	/* Area Init */
