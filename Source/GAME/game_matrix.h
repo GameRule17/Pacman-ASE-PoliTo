@@ -24,4 +24,10 @@
 
 extern char board[HEIGTH][LENGTH];
 
+extern int score;
+
+// Functions to align coordinates from matrix[y][x] to real board
+int alignCoordX (int x);
+int alignCoordY (int y);
+
 #endif /* end __GAME_MATRIX */

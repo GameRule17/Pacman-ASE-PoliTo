@@ -50,8 +50,8 @@ void Draw_Matrix(){
     for(i = 0; i < HEIGTH; i++){
         for(j = 0; j < LENGTH; j++){
             current_value = board[i][j];
-			x_pos = (j * RATIO) + SIDE_PADDING;
-			y_pos = (i * RATIO) + UPPER_PADDING;
+			x_pos = alignCoordX(j);
+			y_pos = alignCoordY(i);
            
             switch(current_value){ 
                 case WALL:
@@ -64,10 +64,10 @@ void Draw_Matrix(){
                     Draw_Circle(x_pos, y_pos, POWER_PILL_RADIUS, Magenta);
 				break;
 				case TP_LEFT:
-					Draw_Wall(x_pos, y_pos, Cyan);
+					//Draw_Wall(x_pos, y_pos, Cyan);
 				break;
 				case TP_RIGHT:
-					Draw_Wall(x_pos, y_pos, Cyan);
+					//Draw_Wall(x_pos, y_pos, Cyan);
 				break;
 				case PACMAN:
 					Draw_Circle(x_pos, y_pos, PACMAN_RADIUS, Yellow);
@@ -79,10 +79,14 @@ void Draw_Matrix(){
     }
 }
 
-void Draw_Pacman_Move(int newX, int newY, int prevX, int prevY) {
+void Draw_Pacman_Move(int newY, int newX, int prevY, int prevX) {
 	// Draw black on the previous position
-	Draw_Circle((prevY * RATIO) + SIDE_PADDING, (prevX * RATIO) + UPPER_PADDING, PACMAN_RADIUS, Black);
+	Draw_Circle(alignCoordX(prevX), alignCoordY(prevY), PACMAN_RADIUS, Black);
 
     // Draw pacman on the new position
-    Draw_Circle((newY * RATIO) + SIDE_PADDING, (newX * RATIO) + UPPER_PADDING, PACMAN_RADIUS, Yellow);
+    Draw_Circle(alignCoordX(newX), alignCoordY(newY), PACMAN_RADIUS, Yellow);
 }
+
+//void Draw_Score() {
+//	GUI_Text(0,0,
+//}

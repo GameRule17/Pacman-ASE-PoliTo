@@ -1,5 +1,7 @@
 #include "GAME/game_matrix.h"
 
+int score = 0;
+
 /*
  0: Void
  1: Wall
@@ -43,3 +45,11 @@ char board[HEIGTH][LENGTH] = {
     {1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 };
+
+int alignCoordX (int x) {
+	return (x * RATIO) + SIDE_PADDING;
+}
+
+int alignCoordY (int y) {
+	return (y * RATIO) + UPPER_PADDING;
+}
