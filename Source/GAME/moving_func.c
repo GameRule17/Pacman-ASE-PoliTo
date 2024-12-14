@@ -70,9 +70,13 @@ int movePacman(int direction) {
 			break;
 			case STANDARD_PILL:
 				score = score + 10;
+				// Draw the new score
+				Draw_Score();
 			break;
 			case POWER_PILL:
 				score = score + 50;
+				// Draw the new score
+				Draw_Score();
 			break;
 			default:
 			break;

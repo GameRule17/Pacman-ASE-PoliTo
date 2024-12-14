@@ -1,4 +1,5 @@
 #import "GAME/drawing_func.h"
+#include <stdio.h> /*for sprintf*/
 
 void Draw_Wall(int current_X, int current_Y, int color){
 	int i, j;
@@ -40,9 +41,39 @@ void Draw_Circle(int center_X, int center_Y, int radius, int color){
     }
 }
 
-void Draw_Matrix(){
+
+
+void Draw_Score() {
+	/*
+		Variable score is declared as int, but GUI_Text func requires a string as input
+		Next code is used to convert the int value into uint8_t
+	*/
+	uint8_t score_conv_string[12];
+	sprintf((char *)score_conv_string, "%d", score);
+	
+	// x=170 y=16 were find simply testing different positions in order to look it pretty
+	GUI_Text(170,16,(uint8_t *) score_conv_string, Blue, Black);
+}
+
+void Draw_Time_Left() {
+	uint8_t count_down_conv_string[12];
+	sprintf((char *)count_down_conv_string, "%d    ", countdown);
+	
+	GUI_Text(50,16,(uint8_t *) count_down_conv_string, Blue, Black);
+}
+
+void Draw_Title() {
+	// x=20 y=4 were find simply testing different positions in order to look it pretty
+	GUI_Text(20,4,(uint8_t *) "GAME OVER IN      SCORE", Blue, Black);
+}
+
+void Draw_Board(){
     int i, j, current_value;
 	int x_pos, y_pos;
+	
+	Draw_Title();
+	Draw_Score();
+	Draw_Time_Left();
 	
 	setPacman();
 	generatePowerPills();
@@ -87,6 +118,7 @@ void Draw_Pacman_Move(int newY, int newX, int prevY, int prevX) {
     Draw_Circle(alignCoordX(newX), alignCoordY(newY), PACMAN_RADIUS, Yellow);
 }
 
-//void Draw_Score() {
-//	GUI_Text(0,0,
-//}
+void Draw_Game_Over_Screen() {
+	LCD_Clear(Black);
+	GUI_Text(80,150,(uint8_t *) "GAME OVER", Blue, Black);
+}

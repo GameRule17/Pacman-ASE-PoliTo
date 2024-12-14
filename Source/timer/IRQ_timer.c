@@ -24,10 +24,12 @@ void TIMER0_IRQHandler (void)
 {
 	if(LPC_TIM0->IR & 1) {		// MR0 
 		// your code
+		// MR0 counts every SECOND
+		updateCountdown();
 		LPC_TIM0->IR = 1;			//clear interrupt flag
 	}
 	else if(LPC_TIM0->IR & 2){	// MR1
-		// your code	
+		// your code
 		LPC_TIM0->IR = 2;			// clear interrupt flag 
 	}
 	else if(LPC_TIM0->IR & 4){	// MR2

@@ -747,6 +747,16 @@
               <FileType>1</FileType>
               <FilePath>.\Source\GAME\game_matrix.c</FilePath>
             </File>
+            <File>
+              <FileName>game_state.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\GAME\game_state.c</FilePath>
+            </File>
+            <File>
+              <FileName>game_state.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\GAME\game_state.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1443,6 +1453,16 @@
               <FileName>game_matrix.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\GAME\game_matrix.c</FilePath>
+            </File>
+            <File>
+              <FileName>game_state.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\GAME\game_state.c</FilePath>
+            </File>
+            <File>
+              <FileName>game_state.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\GAME\game_state.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -89,8 +89,10 @@ int main(void)
 	//init_timer(timer_num, Prescaler, MatchReg, SRImatchReg, TimerInterval);
 	
 		//TIMER0
-	//init_timer(0, 0, 0, 3, 0x);
-	//enable_timer(0);
+	// MR0 is used as UPDATE for every SECOND PASSED
+	// SRImatchReg set as 1 -> INTERRUPT
+	init_timer(0, 0, 0, 3, 0x17D7840); // 1*25000000=0x17D7840
+	enable_timer(0);
 	
 		//TIMER1
 	//init_timer(1, 0, 0, 3, 0x);
@@ -106,7 +108,7 @@ int main(void)
 	
 	
 	/* Area Code */
-	Draw_Matrix();
+	Draw_Board();
 	
 	
 	
