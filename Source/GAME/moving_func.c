@@ -1,7 +1,9 @@
 #include "GAME/moving_func.h"
 
-int pacman_x = 14;
-int pacman_y = 14;
+int pacman_x = PACMAN_INITIAL_X;
+int pacman_y = PACMAN_INITIAL_Y;
+
+int direction = 0;
 
 void setPacman() {
 	board[pacman_y][pacman_x] = PACMAN;
@@ -92,7 +94,11 @@ int movePacman(int direction) {
 		pacman_x = new_X;
 		
         return 1; // Movement done
-    }
+    } else {
+		// If a WALL is encountered, it's useless to continue trying going through it
+		// Better stopping pacman movement
+		direction = 0;
+	}
 
     return 0; // Movement not completed
 }

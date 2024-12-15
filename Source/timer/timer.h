@@ -11,6 +11,7 @@
 #define __TIMER_H
 
 #include "LPC17xx.h"
+#include "GAME/moving_func.h"
 
 /* init_timer.c */
 //extern uint32_t init_timer( uint8_t timer_num, uint32_t timerInterval );

@@ -18,13 +18,12 @@ volatile int down_0 = 0;
 volatile int down_1 = 0;
 volatile int down_2 = 0;
 
+	/* Variabili Globali */
 volatile int J_up = 0;
 volatile int J_down = 0;
 volatile int J_right = 0;
 volatile int J_left = 0;
 volatile int J_click = 0;
-
-	/* Variabili Globali */
 
 
 /******************************************************************************
@@ -105,7 +104,7 @@ void RIT_IRQHandler(void)
 		switch(J_up){
 			case 1:
 				// your code here
-				movePacman(J_UP_KEY); // 1 = UP MOVE			
+				direction = J_UP_KEY;			
 				break;
 			default:
 				// potential other code here
@@ -124,7 +123,7 @@ void RIT_IRQHandler(void)
 		switch(J_down){
 			case 1:
 				// your code here
-				movePacman(J_DOWN_KEY); // 2 = DOWN MOVE
+				direction = J_DOWN_KEY;
 				break;
 			default:
 				// potential other code here
@@ -143,7 +142,7 @@ void RIT_IRQHandler(void)
 		switch(J_right){
 			case 1:
 				// your code here
-				movePacman(J_RIGHT_KEY); // 4 = RIGHT MOVE
+				direction = J_RIGHT_KEY;	
 				break;
 			default:
 				// potential other code here
@@ -162,7 +161,7 @@ void RIT_IRQHandler(void)
 		switch(J_left){
 			case 1:
 				// your code here
-				movePacman(J_LEFT_KEY); // 3 = LEFT MOVE
+				direction = J_LEFT_KEY;
 				break;
 			default:
 				// potential other code here

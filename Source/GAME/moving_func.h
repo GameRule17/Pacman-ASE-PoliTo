@@ -9,6 +9,8 @@
 #define J_LEFT_KEY 3
 #define J_RIGHT_KEY 4
 
+extern int direction;
+
 extern int pacman_x;
 extern int pacman_y;
 

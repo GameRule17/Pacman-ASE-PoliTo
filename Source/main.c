@@ -88,15 +88,16 @@ int main(void)
 	
 	//init_timer(timer_num, Prescaler, MatchReg, SRImatchReg, TimerInterval);
 	
-		//TIMER0
+		//TIMER0 - COUNTDOWN TIMER
 	// MR0 is used as UPDATE for every SECOND PASSED
 	// SRImatchReg set as 1 -> INTERRUPT
 	init_timer(0, 0, 0, 3, 0x17D7840); // 1*25000000=0x17D7840
-	enable_timer(0);
+	//enable_timer(0);
 	
-		//TIMER1
-	//init_timer(1, 0, 0, 3, 0x);
-	//enable_timer(1);
+		//TIMER1 - PACMAN MOVES TIMER
+	// Every 200ms pacman moves, if one of the flags UP/DOWN/LEFT/RIGHT is =1
+	init_timer(1, 0, 0, 3, 0x4C4B40); // 0,2*25000000=0x4C4B40
+	enable_timer(1);
 	
 		//TIMER2
 	//init_timer(2, 0, 0, 3, 0x);
@@ -109,9 +110,6 @@ int main(void)
 	
 	/* Area Code */
 	Draw_Board();
-	
-	
-	
 	
 	
 	/* Area Loop */

@@ -76,7 +76,7 @@ void Draw_Board(){
 	Draw_Time_Left();
 	
 	setPacman();
-	generatePowerPills();
+	//generatePowerPills();
  
     for(i = 0; i < HEIGTH; i++){
         for(j = 0; j < LENGTH; j++){

@@ -17,6 +17,9 @@
 #define TP_RIGHT 5
 #define PACMAN 9
 
+#define PACMAN_INITIAL_X 14
+#define PACMAN_INITIAL_Y 14
+
 #define NUM_POWER_PILLS 6
 
 #define PACMAN_RADIUS 3 // Radius of circle representing pacman
