@@ -92,7 +92,7 @@ int main(void)
 	// MR0 is used as UPDATE for every SECOND PASSED
 	// SRImatchReg set as 1 -> INTERRUPT
 	init_timer(0, 0, 0, 3, 0x17D7840); // 1*25000000=0x17D7840
-	//enable_timer(0);
+	enable_timer(0);
 	
 		//TIMER1 - PACMAN MOVES TIMER
 	// Every 200ms pacman moves, if one of the flags UP/DOWN/LEFT/RIGHT is =1

@@ -1,6 +1,8 @@
 #import "GAME/drawing_func.h"
 #include <stdio.h> /*for sprintf*/
 
+/* ******************** GENERIC DRAW FUNCTIONS ******************** */
+
 void Draw_Wall(int current_X, int current_Y, int color){
 	int i, j;
  
@@ -41,7 +43,30 @@ void Draw_Circle(int center_X, int center_Y, int radius, int color){
     }
 }
 
+void Draw_Heart(int center_X, int center_Y, int size, int color) {
+    int radius = size / 2;
+    int half_size = size / 2;
 
+    Draw_Circle(center_X - radius, center_Y - radius / 2, radius, color);
+    Draw_Circle(center_X + radius, center_Y - radius / 2, radius, color); 
+
+    int x, y;
+    for (y = 0; y < size; y++) { 
+        for (x = -size+1 + y; x <= size - y - 1; x++) {
+            Draw_Point(center_X + x, center_Y + y, color);
+        }
+    }
+}
+
+/* ******************** GAME DRAW FUNCTIONS ******************** */
+
+void Draw_Title() {
+	// x=20 y=4 were found simply testing different positions in order to look it pretty
+	GUI_Text(20,4,(uint8_t *) "GAME OVER IN      SCORE", Blue, Black);
+	
+	// x=60 y=285 were found simply testing different positions in order to look it pretty
+	GUI_Text(60,285,(uint8_t *) "REMAINING LIVES", Blue, Black);
+}
 
 void Draw_Score() {
 	/*
@@ -51,7 +76,7 @@ void Draw_Score() {
 	uint8_t score_conv_string[12];
 	sprintf((char *)score_conv_string, "%d", score);
 	
-	// x=170 y=16 were find simply testing different positions in order to look it pretty
+	// x=170 y=16 were found simply testing different positions in order to look it pretty
 	GUI_Text(170,16,(uint8_t *) score_conv_string, Blue, Black);
 }
 
@@ -62,9 +87,20 @@ void Draw_Time_Left() {
 	GUI_Text(50,16,(uint8_t *) count_down_conv_string, Blue, Black);
 }
 
-void Draw_Title() {
-	// x=20 y=4 were find simply testing different positions in order to look it pretty
-	GUI_Text(20,4,(uint8_t *) "GAME OVER IN      SCORE", Blue, Black);
+void Draw_Lives(int initialX, int initialY) {
+	int nextHeartDistance = 16;
+	int i = 0;
+	
+	for(i=0; i<MAX_NUM_LIFES; i++) {
+		if (i<num_lifes) {
+			// For the actual lives a red heart is showed
+			Draw_Heart(initialX,initialY,7,Red);
+		} else {
+			// Otherwise a black heart is showed, to clear the screen
+			Draw_Heart(initialX,initialY,7,Black);
+		}
+		initialX = initialX + nextHeartDistance;
+	}
 }
 
 void Draw_Board(){
@@ -74,9 +110,10 @@ void Draw_Board(){
 	Draw_Title();
 	Draw_Score();
 	Draw_Time_Left();
+	Draw_Lives(X_POSITION_LIVES_IN_GAME, Y_POSITION_LIVES_IN_GAME);
 	
 	setPacman();
-	//generatePowerPills();
+	generatePowerPills();
  
     for(i = 0; i < HEIGTH; i++){
         for(j = 0; j < LENGTH; j++){
@@ -120,5 +157,15 @@ void Draw_Pacman_Move(int newY, int newX, int prevY, int prevX) {
 
 void Draw_Game_Over_Screen() {
 	LCD_Clear(Black);
-	GUI_Text(80,150,(uint8_t *) "GAME OVER", Blue, Black);
+	GUI_Text(85,130,(uint8_t *) "GAME OVER", Blue, Black);
+	
+	GUI_Text(60,150,(uint8_t *) "REMAINING LIVES", Blue, Black);
+	Draw_Lives(X_POSITION_LIVES_IN_GAMEOVER, Y_POSITION_LIVES_IN_GAMEOVER);
+}
+
+void Draw_Game_Ended() {
+	LCD_Clear(Black);
+	GUI_Text(85,130,(uint8_t *) "GAME OVER", Blue, Black);
+	GUI_Text(47,150,(uint8_t *) "NO REMAINING LIVES", Blue, Black);
+	GUI_Text(86,170,(uint8_t *) "YOU LOST!", Blue, Black);
 }

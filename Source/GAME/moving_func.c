@@ -13,7 +13,7 @@ void generatePowerPills() {
 	int randX, randY;
 	int numPowerPills = 0;
 	
-	// Repeat ultil 6 standard pills aren't converted into power pills
+	// Repeat until 6 standard pills aren't converted into power pills
 	while (numPowerPills < NUM_POWER_PILLS) {
 		randX = rand() % LENGTH; // Generating random X value from 0 to LENGTH=28
 		randY = rand() % HEIGTH; // Generating random Y value from 0 to LENGTH=31
@@ -71,12 +71,12 @@ int movePacman(int direction) {
 				new_X = new_X-LENGTH+2;
 			break;
 			case STANDARD_PILL:
-				score = score + 10;
+				addNewValueScore(10);
 				// Draw the new score
 				Draw_Score();
 			break;
 			case POWER_PILL:
-				score = score + 50;
+				addNewValueScore(50);
 				// Draw the new score
 				Draw_Score();
 			break;

@@ -1,7 +1,5 @@
 #include "GAME/game_matrix.h"
 
-int score = 0;
-
 /*
  0: Void
  1: Wall
