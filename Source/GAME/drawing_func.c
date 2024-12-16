@@ -1,6 +1,8 @@
 #import "GAME/drawing_func.h"
 #include <stdio.h> /*for sprintf*/
 
+int firstBoardGenerated = 0;
+
 /* ******************** GENERIC DRAW FUNCTIONS ******************** */
 
 void Draw_Wall(int current_X, int current_Y, int color){
@@ -14,7 +16,7 @@ void Draw_Wall(int current_X, int current_Y, int color){
 }
 
 void Draw_Point(int current_X, int current_Y, int color){
-    LCD_SetPoint(current_X + 4, current_Y + 4, color);
+	LCD_SetPoint(current_X + 4, current_Y + 4, color);
 }
 
 void Draw_Circle(int center_X, int center_Y, int radius, int color){
@@ -56,6 +58,23 @@ void Draw_Heart(int center_X, int center_Y, int size, int color) {
             Draw_Point(center_X + x, center_Y + y, color);
         }
     }
+}
+
+void LCD_FillRectWithBorder(uint16_t x0, uint16_t y0, uint16_t length, uint16_t depth, uint16_t fill_color, uint16_t border_color) {
+    uint16_t x1 = x0 + length - 1;
+    uint16_t y1 = y0 + depth - 1;
+
+    uint16_t i;
+
+    LCD_DrawLine(x0, y0, x1, y0, border_color);
+	
+    for (i = y0 + 1; i < y1; i++) {
+        LCD_DrawLine(x0, i, x0, i, border_color);
+        LCD_DrawLine(x0 + 1, i, x1 - 1, i, fill_color);
+        LCD_DrawLine(x1, i, x1, i, border_color);
+    }
+	
+	LCD_DrawLine(x0, y1, x1, y1, border_color); // Linea inferiore
 }
 
 /* ******************** GAME DRAW FUNCTIONS ******************** */
@@ -103,23 +122,38 @@ void Draw_Lives(int initialX, int initialY) {
 	}
 }
 
-void Draw_Board(){
+void Draw_Board(int drawAllBoardFlag){
     int i, j, current_value;
 	int x_pos, y_pos;
+	int newStartingJ = 0, newStartingI = 0;
+	int addPaddingI = 0;
 	
 	Draw_Title();
 	Draw_Score();
 	Draw_Time_Left();
 	Draw_Lives(X_POSITION_LIVES_IN_GAME, Y_POSITION_LIVES_IN_GAME);
 	
-	setPacman();
-	generatePowerPills();
+	if (firstBoardGenerated == 0) {
+		setPacman();
+		generatePowerPills();
+		firstBoardGenerated = 1;
+	}
+	
+	if (drawAllBoardFlag == 0) {
+		newStartingJ = 7;
+		newStartingI = 9;
+		addPaddingI = 2;
+	}
  
-    for(i = 0; i < HEIGTH; i++){
-        for(j = 0; j < LENGTH; j++){
+    for(i = newStartingI; i < HEIGTH - newStartingI - addPaddingI; i++){
+        for(j = newStartingJ; j < LENGTH - newStartingJ; j++){
             current_value = board[i][j];
 			x_pos = alignCoordX(j);
 			y_pos = alignCoordY(i);
+			
+			if (drawAllBoardFlag == 0) {
+				Draw_Wall(x_pos, y_pos, Black);
+			}
            
             switch(current_value){ 
                 case WALL:
@@ -165,7 +199,14 @@ void Draw_Game_Over_Screen() {
 
 void Draw_Game_Ended() {
 	LCD_Clear(Black);
-	GUI_Text(85,130,(uint8_t *) "GAME OVER", Blue, Black);
-	GUI_Text(47,150,(uint8_t *) "NO REMAINING LIVES", Blue, Black);
-	GUI_Text(86,170,(uint8_t *) "YOU LOST!", Blue, Black);
+	GUI_Text(85, 130,(uint8_t *) "GAME OVER", Blue, Black);
+	GUI_Text(47, 150,(uint8_t *) "NO REMAINING LIVES", Blue, Black);
+	GUI_Text(86, 170,(uint8_t *) "YOU LOST!", Blue, Black);
+}
+
+void Draw_Pause_Box() {
+	LCD_FillRectWithBorder(64, 104, 112, 88, Black, Red);
+	GUI_Text(80, 118,(uint8_t *) "GAME PAUSE", Red, Black);
+	GUI_Text(80, 150,(uint8_t *) "Press INT0", Red, Black);
+	GUI_Text(82, 162,(uint8_t *) "to resume", Red, Black);
 }

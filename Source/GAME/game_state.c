@@ -4,6 +4,7 @@ int countdown = MAX_TIME_SECONDS;
 int num_lifes = INITIAL_NUM_LIFES;
 int score = 0;
 int threshold = 1000;
+int game_pause = 1;
 
 void updateCountdown() {
 	countdown--;

@@ -44,6 +44,19 @@ void RIT_IRQHandler(void)
 			switch(down_0) {
 				case 2:
 					// your code here
+					
+					if(game_pause == 1) {
+						game_pause = 0;
+						Draw_Board(0);
+						enable_timer(0);
+						enable_timer(1);
+					} else {
+						game_pause = 1;
+						Draw_Pause_Box();
+						disable_timer(0);
+						disable_timer(1);
+					}
+				
 					break;
 				default:
 					break;

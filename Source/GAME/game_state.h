@@ -4,7 +4,7 @@
 #import "GAME/drawing_func.h"
 
 #define MAX_TIME_SECONDS 60
-#define INITIAL_NUM_LIFES 0
+#define INITIAL_NUM_LIFES 1
 #define MAX_NUM_LIFES 5
 
 #define X_POSITION_LIVES_IN_GAME 85
@@ -15,6 +15,7 @@
 extern int countdown;
 extern int num_lifes;
 extern int score;
+extern int game_pause;
 
 void updateCountdown();
 void addNewValueScore(int addValue);
