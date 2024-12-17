@@ -6,6 +6,7 @@
 #define MAX_TIME_SECONDS 60
 #define INITIAL_NUM_LIFES 1
 #define MAX_NUM_LIFES 5
+#define MAX_NUM_PILLS 240
 
 #define X_POSITION_LIVES_IN_GAME 85
 #define Y_POSITION_LIVES_IN_GAME 300
@@ -16,8 +17,9 @@ extern int countdown;
 extern int num_lifes;
 extern int score;
 extern int game_pause;
+extern int num_eated_pills;
 
 void updateCountdown();
-void addNewValueScore(int addValue);
+void updateScoreAndCheckVictory(int addValue);
 
 #endif /* end __GAME_STATE */

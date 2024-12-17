@@ -73,12 +73,12 @@ int movePacman(int direction) {
 					new_X = new_X-LENGTH+2;
 				break;
 				case STANDARD_PILL:
-					addNewValueScore(10);
+					updateScoreAndCheckVictory(10);
 					// Draw the new score
 					Draw_Score();
 				break;
 				case POWER_PILL:
-					addNewValueScore(50);
+					updateScoreAndCheckVictory(50);
 					// Draw the new score
 					Draw_Score();
 				break;

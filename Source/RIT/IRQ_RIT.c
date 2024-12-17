@@ -25,6 +25,25 @@ volatile int J_right = 0;
 volatile int J_left = 0;
 volatile int J_click = 0;
 
+volatile int enableKey1Usage = 0;
+volatile int enableInt0Usage = 1;
+
+void enableKEY1() {
+	enableKey1Usage = 1;
+}
+
+void disableKEY1() {
+	enableKey1Usage = 0;
+}
+
+void enableINT0() {
+	enableInt0Usage = 1;
+}
+
+void disableINT0() {
+	enableInt0Usage = 0;
+}
+
 
 /******************************************************************************
 ** Function name:		RIT_IRQHandler
@@ -45,16 +64,12 @@ void RIT_IRQHandler(void)
 				case 2:
 					// your code here
 					
-					if(game_pause == 1) {
-						game_pause = 0;
-						Draw_Board(0);
-						enable_timer(0);
-						enable_timer(1);
-					} else {
-						game_pause = 1;
-						Draw_Pause_Box();
-						disable_timer(0);
-						disable_timer(1);
+					if(enableInt0Usage == 1) {
+						if(game_pause == 1) {
+							removeGamePause();
+						} else {
+							setGamePause();
+						}
 					}
 				
 					break;
@@ -77,6 +92,12 @@ void RIT_IRQHandler(void)
 			switch(down_1){
 				case 2:
 					// your code here
+					
+					if (enableKey1Usage == 1) {
+						restartGame();
+						disableKEY1();
+					}
+				
 					break;
 				default:
 					break;

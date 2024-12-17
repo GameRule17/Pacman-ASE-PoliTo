@@ -195,6 +195,11 @@ void Draw_Game_Over_Screen() {
 	
 	GUI_Text(60,150,(uint8_t *) "REMAINING LIVES", Blue, Black);
 	Draw_Lives(X_POSITION_LIVES_IN_GAMEOVER, Y_POSITION_LIVES_IN_GAMEOVER);
+	GUI_Text(40,200,(uint8_t *) "Press KEY1 to Restart", Blue, Black);
+}
+
+void Clear_Game_Over_Screen() {
+	LCD_FillRectWithBorder(40,130,170,100,Black,Black);
 }
 
 void Draw_Game_Ended() {
@@ -209,4 +214,9 @@ void Draw_Pause_Box() {
 	GUI_Text(80, 118,(uint8_t *) "GAME PAUSE", Red, Black);
 	GUI_Text(80, 150,(uint8_t *) "Press INT0", Red, Black);
 	GUI_Text(82, 162,(uint8_t *) "to resume", Red, Black);
+}
+
+void Draw_Victory_Screen() {
+	LCD_Clear(Black);
+	GUI_Text(85, 130,(uint8_t *) "VICTORY!", Blue, Black);
 }

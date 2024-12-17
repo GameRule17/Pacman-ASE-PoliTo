@@ -15,5 +15,6 @@ void Draw_Lives(int initialX, int initialY);
 void Draw_Game_Over_Screen();
 void Draw_Game_Ended();
 void Draw_Pause_Box();
+void Draw_Victory_Screen();
 
 #endif /* end __DRAWING_FUNC */
