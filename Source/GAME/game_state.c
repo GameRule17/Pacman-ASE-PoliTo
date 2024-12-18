@@ -5,16 +5,16 @@ void setGamePause();
 void removeGamePause();
 void restartGame();
 void updateCountdown();
-void updateScoreAndCheckVictory(int addValue);
+void updateScoreAndCheckVictory(uint16_t addValue);
 
 /* **************************** GLOBAL VARIABLES **************************** */
 
-int countdown = MAX_TIME_SECONDS;
+uint16_t countdown = MAX_TIME_SECONDS;
 int num_lifes = INITIAL_NUM_LIFES;
-int score = 0;
-int threshold = 1000;
-int game_pause = 1;
-int num_eated_pills = 0;
+uint16_t score = 0;
+uint16_t threshold = 1000;
+uint16_t game_pause = 1;
+uint16_t num_eated_pills = 0;
 
 /* ******************** GAME STATE FUNCTIONS ******************** */
 
@@ -60,7 +60,7 @@ void updateCountdown() {
 	}
 }
 
-void updateScoreAndCheckVictory(int addValue) {
+void updateScoreAndCheckVictory(uint16_t addValue) {
 	score = score + addValue;
 	
 	// To manage adding a new life every 1000 points obtained

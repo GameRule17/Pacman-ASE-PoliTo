@@ -1,6 +1,8 @@
 #ifndef __GAME_MATRIX
 #define __GAME_MATRIX
 
+#include "LPC17xx.h"
+
 #define LENGTH 28
 #define HEIGTH 31
 #define RATIO 8 // Every point in the matrix is represented as 8x8pixels in the real board
@@ -22,10 +24,10 @@
 
 #define NUM_POWER_PILLS 6
 
-extern char board[HEIGTH][LENGTH];
+extern uint8_t board[HEIGTH][LENGTH];
 
 // Functions to align coordinates from matrix[y][x] to real board
-int alignCoordX (int x);
-int alignCoordY (int y);
+uint16_t alignCoordX (uint16_t x);
+uint16_t alignCoordY (uint16_t y);
 
 #endif /* end __GAME_MATRIX */

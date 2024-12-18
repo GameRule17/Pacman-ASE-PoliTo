@@ -10,7 +10,7 @@
  9: Pacman
 */
 
-char board[HEIGTH][LENGTH] = {
+uint8_t board[HEIGTH][LENGTH] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 1},
     {1, 0, 1, 1, 1, 1, 2, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 2, 1, 1, 1, 1, 0, 1},
@@ -44,10 +44,10 @@ char board[HEIGTH][LENGTH] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 };
 
-int alignCoordX (int x) {
+uint16_t alignCoordX (uint16_t x) {
 	return (x * RATIO) + SIDE_PADDING;
 }
 
-int alignCoordY (int y) {
+uint16_t alignCoordY (uint16_t y) {
 	return (y * RATIO) + UPPER_PADDING;
 }

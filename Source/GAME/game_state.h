@@ -8,13 +8,13 @@
 #define MAX_NUM_LIFES 3
 #define MAX_NUM_PILLS 240
 
-extern int countdown;
+extern uint16_t countdown;
 extern int num_lifes;
-extern int score;
-extern int game_pause;
-extern int num_eated_pills;
+extern uint16_t score;
+extern uint16_t game_pause;
+extern uint16_t num_eated_pills;
 
 void updateCountdown();
-void updateScoreAndCheckVictory(int addValue);
+void updateScoreAndCheckVictory(uint16_t addValue);
 
 #endif /* end __GAME_STATE */

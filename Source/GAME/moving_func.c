@@ -3,16 +3,16 @@
 /* **************************** FUNCTION PROTOTYPES **************************** */
 void setPacman();
 void tryGenerationPowerPills();
-int movePacman(int direction);
+uint16_t movePacman(uint16_t direction);
 
 
 /* **************************** GLOBAL VARIABLES **************************** */
 
-int pacman_x = PACMAN_INITIAL_X;
-int pacman_y = PACMAN_INITIAL_Y;
+uint16_t pacman_x = PACMAN_INITIAL_X;
+uint16_t pacman_y = PACMAN_INITIAL_Y;
 
-int direction = 0;
-int numPowerPillsGenerated = 0;
+uint16_t direction = 0;
+uint16_t numPowerPillsGenerated = 0;
 
 /* **************************** FUNCTION DEFINED **************************** */
 
@@ -23,7 +23,7 @@ void setPacman() {
 void tryGenerationPowerPills() {
 	int xCoord, yCoord;
 	
-	unsigned char temp = (get_timer_value(1) ^ get_RIT_value()) % 101;
+	int temp = (get_timer_value(1) ^ get_RIT_value()) % 101;
 	
 	if((temp <= PROBABILITY_TRESHOLD) && (numPowerPillsGenerated < NUM_POWER_PILLS)) {
 		srand(get_timer_value(1) ^ get_RIT_value() ^ MAGIC_RANDOM_NUMBER);
@@ -38,9 +38,9 @@ void tryGenerationPowerPills() {
 	}
 }
 
-int movePacman(int direction) {
-	int new_Y, prev_Y, new_X, prev_X;
-	int new_board_value;
+uint16_t movePacman(uint16_t direction) {
+	uint16_t new_Y, prev_Y, new_X, prev_X;
+	uint16_t new_board_value;
 	
 	// Pacman moves if and only if the game is NOT in PAUSE mode
 	if(game_pause == 0) {

@@ -12,12 +12,12 @@
 #define PROBABILITY_TRESHOLD 60
 #define MAGIC_RANDOM_NUMBER 1103515245
 
-extern int direction;
+extern uint16_t direction;
 
-extern int pacman_x;
-extern int pacman_y;
+extern uint16_t pacman_x;
+extern uint16_t pacman_y;
 
-int movePacman(int direction);
+uint16_t movePacman(uint16_t direction);
 void tryGenerationPowerPills();
 
 #endif /* end __MOVING_FUNC */

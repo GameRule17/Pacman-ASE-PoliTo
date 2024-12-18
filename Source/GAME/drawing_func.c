@@ -3,8 +3,8 @@
 
 /* **************************** FUNCTION PROTOTYPES **************************** */
 
-void drawWall(int current_X, int current_Y, int color);
-void drawPoint(int current_X, int current_Y, int color);
+void drawWall(uint16_t current_X, uint16_t current_Y, uint16_t color);
+void drawPoint(uint16_t current_X, uint16_t current_Y, uint16_t color);
 void drawCircle(int center_X, int center_Y, int radius, int color);
 void drawHeart(int center_X, int center_Y, int size, int color);
 void drawRectWithBorder(uint16_t x0, uint16_t y0, uint16_t length, uint16_t depth, uint16_t fill_color, uint16_t border_color);
@@ -12,10 +12,10 @@ void drawRectWithBorder(uint16_t x0, uint16_t y0, uint16_t length, uint16_t dept
 void drawTitle();
 void drawScore();
 void drawTimeLeft();
-void drawLives(int initialX, int initialY);
-void drawPowerPill(int xCoord, int yCoord);
-void drawBoard(int drawAllBoardFlag);
-void drawPacmanMove(int newY, int newX, int prevY, int prevX);
+void drawLives(uint16_t initialX, uint16_t initialY);
+void drawPowerPill(uint16_t xCoord, uint16_t yCoord);
+void drawBoard(uint16_t drawAllBoardFlag);
+void drawPacmanMove(uint16_t newY, uint16_t newX, uint16_t prevY, uint16_t prevX);
 void drawGameOverScreen();
 void clearGameOverScreen();
 void drawGameEndedScreen();
@@ -28,8 +28,8 @@ int firstBoardGenerated = 0;
 
 /* ******************** GENERIC DRAW FUNCTIONS ******************** */
 
-void drawWall(int current_X, int current_Y, int color){
-	int i, j;
+void drawWall(uint16_t current_X, uint16_t current_Y, uint16_t color){
+	uint16_t i, j;
  
 	for(i = 0; i < RATIO; i++){
 		for(j = 0; j < RATIO; j++){
@@ -38,7 +38,7 @@ void drawWall(int current_X, int current_Y, int color){
 	}
 }
 
-void drawPoint(int current_X, int current_Y, int color){
+void drawPoint(uint16_t current_X, uint16_t current_Y, uint16_t color){
 	LCD_SetPoint(current_X + 4, current_Y + 4, color);
 }
 
@@ -113,9 +113,9 @@ void drawTitle() {
 void drawScore() {
 	/*
 		Variable score is declared as int, but GUI_Text func requires a string as input
-		Next code is used to convert the int value into uint8_t
+		Next code is used to convert the int value into uint16_t
 	*/
-	uint8_t score_conv_string[12];
+	uint16_t score_conv_string[12];
 	sprintf((char *)score_conv_string, "%d", score);
 	
 	// x=170 y=16 were found simply testing different positions in order to look it pretty
@@ -123,13 +123,13 @@ void drawScore() {
 }
 
 void drawTimeLeft() {
-	uint8_t count_down_conv_string[12];
+	uint16_t count_down_conv_string[12];
 	sprintf((char *)count_down_conv_string, "%d    ", countdown);
 	
 	GUI_Text(50,16,(uint8_t *) count_down_conv_string, Blue, Black);
 }
 
-void drawLives(int initialX, int initialY) {
+void drawLives(uint16_t initialX, uint16_t initialY) {
 	int nextHeartDistance = 16;
 	int i = 0;
 	
@@ -145,7 +145,7 @@ void drawLives(int initialX, int initialY) {
 	}
 }
 
-void drawPowerPill(int xCoord, int yCoord) {
+void drawPowerPill(uint16_t xCoord, uint16_t yCoord) {
 	drawCircle(alignCoordX(xCoord), alignCoordY(yCoord), POWER_PILL_RADIUS, Magenta);
 }
 
@@ -156,11 +156,11 @@ void drawPowerPill(int xCoord, int yCoord) {
 	this is done for optimizing purposes
 */
 
-void drawBoard(int drawAllBoardFlag){
-    int i, j, current_value;
-	int x_pos, y_pos;
-	int newStartingJ = 0, newStartingI = 0;
-	int addPaddingI = 0;
+void drawBoard(uint16_t drawAllBoardFlag){
+    uint16_t i, j, current_value;
+	uint16_t x_pos, y_pos;
+	uint16_t newStartingJ = 0, newStartingI = 0;
+	uint16_t addPaddingI = 0;
 	
 	drawTitle();
 	drawScore();
@@ -195,9 +195,9 @@ void drawBoard(int drawAllBoardFlag){
                 case STANDARD_PILL:
                     drawPoint(x_pos, y_pos, Magenta);
 				break;
-//				case POWER_PILL:
-//                    drawCircle(x_pos, y_pos, POWER_PILL_RADIUS, Magenta);
-//				break;
+				case POWER_PILL:
+                    drawCircle(x_pos, y_pos, POWER_PILL_RADIUS, Magenta);
+				break;
 //				case TP_LEFT:
 //					  drawWall(x_pos, y_pos, Cyan);
 //				break;
@@ -214,7 +214,7 @@ void drawBoard(int drawAllBoardFlag){
     }
 }
 
-void drawPacmanMove(int newY, int newX, int prevY, int prevX) {
+void drawPacmanMove(uint16_t newY, uint16_t newX, uint16_t prevY, uint16_t prevX) {
 	// Draw black on the previous position
 	drawCircle(alignCoordX(prevX), alignCoordY(prevY), PACMAN_RADIUS, Black);
 
