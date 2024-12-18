@@ -95,8 +95,8 @@ int main(void)
 	//enable_timer(0);
 	
 		//TIMER1 - PACMAN MOVEMENT TIMER
-	// Every 200ms pacman moves, if one of the flags UP/DOWN/LEFT/RIGHT is =1
-	init_timer(1, 0, 0, 3, 0x4C4B40); // 0,2*25000000=0x4C4B40
+	// Every 100ms pacman moves, if flag movement is set
+	init_timer(1, 0, 0, 3, 0x2625A0); // 0,1*25000000=0x2625A0
 	//enable_timer(1);
 	
 		//TIMER2

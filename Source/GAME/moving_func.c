@@ -41,6 +41,8 @@ void tryGenerationPowerPills() {
 uint16_t movePacman(uint16_t direction) {
 	uint16_t new_Y, prev_Y, new_X, prev_X;
 	uint16_t new_board_value;
+	uint8_t sum_to_score;
+	uint8_t flag_pill_eated = 0;
 	
 	// Pacman moves if and only if the game is NOT in PAUSE mode
 	if(game_pause == 0) {
@@ -82,14 +84,12 @@ uint16_t movePacman(uint16_t direction) {
 					new_X = new_X-LENGTH+2;
 				break;
 				case STANDARD_PILL:
-					updateScoreAndCheckVictory(10);
-					// Draw the new score
-					drawScore();
+					sum_to_score = 10;
+					flag_pill_eated = 1;
 				break;
 				case POWER_PILL:
-					updateScoreAndCheckVictory(50);
-					// Draw the new score
-					drawScore();
+					sum_to_score = 50;
+					flag_pill_eated = 1;
 				break;
 				default:
 				break;
@@ -100,6 +100,16 @@ uint16_t movePacman(uint16_t direction) {
 			
 			// Now draw also the move on the display
 			drawPacmanMove(new_Y, new_X, prev_Y, prev_X);
+			
+			// If a pill is eaten, update the new score and check victory
+			if (flag_pill_eated == 1) {
+				// Update and draw the new score 
+				updateScore(sum_to_score);
+				drawScore();
+				
+				checkVictory();
+				flag_pill_eated = 0;
+			}
 			
 			pacman_y = new_Y;
 			pacman_x = new_X;

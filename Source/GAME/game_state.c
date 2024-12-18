@@ -5,7 +5,8 @@ void setGamePause();
 void removeGamePause();
 void restartGame();
 void updateCountdown();
-void updateScoreAndCheckVictory(uint16_t addValue);
+void updateScore(uint16_t addValue);
+void checkVictory();
 
 /* **************************** GLOBAL VARIABLES **************************** */
 
@@ -15,6 +16,7 @@ uint16_t score = 0;
 uint16_t threshold = 1000;
 uint16_t game_pause = 1;
 uint16_t num_eated_pills = 0;
+uint8_t pacman_movement_completed = 0;
 
 /* ******************** GAME STATE FUNCTIONS ******************** */
 
@@ -46,11 +48,11 @@ void updateCountdown() {
 	if(countdown == 0) {
 		disable_timer(0);
 		disable_timer(1);
-		num_lifes--;
-		if(num_lifes == -1) {
+		if(num_lifes == 0) {
 			disable_RIT(); // Disable using all types of buttons
 			drawGameEndedScreen(); // Game ended with no more lives left
 		} else {
+			num_lifes--;
 			disableINT0(); // No sense of pausing the game in game over screen
 			enableKEY1(); // Make possible to click KEY1 to restart the game
 			drawGameOverScreen(); // Game ended with at least 1 life left
@@ -60,7 +62,7 @@ void updateCountdown() {
 	}
 }
 
-void updateScoreAndCheckVictory(uint16_t addValue) {
+void updateScore(uint16_t addValue) {
 	score = score + addValue;
 	
 	// To manage adding a new life every 1000 points obtained
@@ -69,15 +71,14 @@ void updateScoreAndCheckVictory(uint16_t addValue) {
 		drawLives(X_POSITION_LIVES_IN_GAME, Y_POSITION_LIVES_IN_GAME);
 		threshold = threshold + 1000;
 	}
-	
-	// Check Victory
+}
+
+void checkVictory() {
 	num_eated_pills++;
-	if (num_eated_pills == MAX_NUM_PILLS) {
-		game_pause = 1;
+	if (num_eated_pills == 5) {
 		disable_timer(0);
 		disable_timer(1);
 		disable_RIT(); // Disable using all types of buttons
 		drawVictoryScreen();
 	}
 }
-

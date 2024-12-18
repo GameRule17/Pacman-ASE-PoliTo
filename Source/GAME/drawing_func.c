@@ -217,10 +217,11 @@ void drawBoard(uint16_t drawAllBoardFlag){
 void drawPacmanMove(uint16_t newY, uint16_t newX, uint16_t prevY, uint16_t prevX) {
 	// Draw black on the previous position
 	drawCircle(alignCoordX(prevX), alignCoordY(prevY), PACMAN_RADIUS, Black);
-
-    // Draw pacman on the new position
+	
+	// Draw pacman on the new position
     drawCircle(alignCoordX(newX), alignCoordY(newY), PACMAN_RADIUS, Yellow);
 }
+
 
 void drawGameOverScreen() {
 	LCD_Clear(Black);
