@@ -82,15 +82,8 @@ int main(void)
 	
 	/* Area Timers */
 	
-	// t * f = count
-	// f = 25Mhz	=> 25'000'000 Hz
-	// t = richiesta del problema
-	
-	//init_timer(timer_num, Prescaler, MatchReg, SRImatchReg, TimerInterval);
-	
 		//TIMER0 - COUNTDOWN TIMER
 	// MR0 is used as UPDATE for every SECOND PASSED
-	// SRImatchReg set as 1 -> INTERRUPT
 	init_timer(0, 0, 0, 3, 0x17D7840); // 1*25000000=0x17D7840
 	//enable_timer(0);
 	

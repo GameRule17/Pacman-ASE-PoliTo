@@ -9,7 +9,7 @@
 #define MAX_NUM_PILLS 240
 
 extern uint16_t countdown;
-extern int num_lifes;
+extern uint16_t num_lifes;
 extern uint16_t score;
 extern uint16_t game_pause;
 extern uint16_t num_eated_pills;

@@ -226,32 +226,32 @@ void drawPacmanMove(uint16_t newY, uint16_t newX, uint16_t prevY, uint16_t prevX
 void drawGameOverScreen() {
 	LCD_Clear(Black);
 	// x and y were found simply testing different positions in order to look it pretty
-	GUI_Text(85,130,(uint8_t *) "GAME OVER", Blue, Black);
+	GUI_Text(X_GAME_OVER,Y_GAME_OVER,(uint8_t *) "GAME OVER", Blue, Black);
 	
-	GUI_Text(60,150,(uint8_t *) "REMAINING LIVES", Blue, Black);
+	GUI_Text(X_REMAINING_LIVES,Y_REMAINING_LIVES,(uint8_t *) "REMAINING LIVES", Blue, Black);
 	drawLives(X_POSITION_LIVES_IN_GAMEOVER, Y_POSITION_LIVES_IN_GAMEOVER);
-	GUI_Text(40,200,(uint8_t *) "Press KEY1 to Restart", Blue, Black);
+	GUI_Text(X_PRESS_KEY1_TO_RESTART,Y_PRESS_KEY1_TO_RESTART,(uint8_t *) "Press KEY1 to Restart", Blue, Black);
 }
 
 void clearGameOverScreen() {
 	// Only a rect over the Game Over texts is drawn
-	drawRectWithBorder(40,130,170,100,Black,Black);
+	drawRectWithBorder(35,130,170,100,Black,Black);
 }
 
 void drawGameEndedScreen() {
 	LCD_Clear(Black);
 	// x and y were found simply testing different positions in order to look it pretty
-	GUI_Text(85, 130,(uint8_t *) "GAME OVER", Blue, Black);
-	GUI_Text(47, 150,(uint8_t *) "NO REMAINING LIVES", Blue, Black);
-	GUI_Text(86, 170,(uint8_t *) "YOU LOST!", Blue, Black);
+	GUI_Text(X_GAME_OVER, Y_GAME_OVER,(uint8_t *) "GAME OVER", Blue, Black);
+	GUI_Text(X_NO_REMAINING_LIVES, Y_NO_REMAINING_LIVES,(uint8_t *) "NO REMAINING LIVES", Blue, Black);
+	GUI_Text(X_YOU_LOST, Y_YOU_LOST,(uint8_t *) "YOU LOST!", Blue, Black);
 }
 
 void drawPauseBox() {
 	drawRectWithBorder(64, 104, 112, 88, Black, Red);
 	// x and y were found simply testing different positions in order to look it pretty
-	GUI_Text(80, 118,(uint8_t *) "GAME PAUSE", Red, Black);
-	GUI_Text(80, 150,(uint8_t *) "Press INT0", Red, Black);
-	GUI_Text(82, 162,(uint8_t *) "to resume", Red, Black);
+	GUI_Text(X_GAME_PAUSED, Y_GAME_PAUSED,(uint8_t *) "GAME PAUSED", Red, Black);
+	GUI_Text(X_PRESS_INT0, Y_PRESS_INT0,(uint8_t *) "Press INT0", Red, Black);
+	GUI_Text(X_TO_RESUME, Y_TO_RESUME,(uint8_t *) "to resume", Red, Black);
 }
 
 void drawVictoryScreen() {
