@@ -7,7 +7,7 @@ int threshold = 1000;
 int game_pause = 1;
 int num_eated_pills = 0;
 
-/* ******************** TESTING PURPOSE FUNCTIONS ******************** */
+/* ******************** TESTING PURPOSES FUNCTIONS ******************** */
 //void countStandardPills() {
 //	int i, j;
 //	for(i = 0; i < HEIGTH; i++){
@@ -40,21 +40,23 @@ void restartGame() {
 	Draw_Board(1);
 	setGamePause();
 	enableINT0();
-	// reset all game statistics
+	countdown = MAX_TIME_SECONDS; // Reset countdown statistic
+	Draw_Time_Left();
 }
 
 void updateCountdown() {
 	countdown--;
 	if(countdown == 0) {
 		disable_timer(0);
+		disable_timer(1);
 		num_lifes--;
 		if(num_lifes == -1) {
 			disable_RIT(); // Disable using all types of buttons
-			Draw_Game_Ended(); // Because game ended with no more lives left
+			Draw_Game_Ended(); // Game ended with no more lives left
 		} else {
-			Draw_Game_Over_Screen(); // Game ended with at least 1 life left
-			enableKEY1(); // Make possible to click KEY1 to restart the game
 			disableINT0(); // No sense of pausing the game in game over screen
+			enableKEY1(); // Make possible to click KEY1 to restart the game
+			Draw_Game_Over_Screen(); // Game ended with at least 1 life left
 		}
 	} else {
 		Draw_Time_Left();
@@ -75,6 +77,8 @@ void updateScoreAndCheckVictory(int addValue) {
 	num_eated_pills++;
 	if (num_eated_pills == MAX_NUM_PILLS) {
 		game_pause = 1;
+		disable_timer(0);
+		disable_timer(1);
 		disable_RIT(); // Disable using all types of buttons
 		Draw_Victory_Screen();
 	}

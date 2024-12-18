@@ -56,7 +56,10 @@ void TIMER1_IRQHandler (void)
 {
 	if(LPC_TIM1->IR & 1) {		// MR0 
 		// your code
+		
+		tryGenerationPowerPills();
 		movePacman(direction);
+		
 		LPC_TIM1->IR = 1;			//clear interrupt flag
 	}
 	else if(LPC_TIM1->IR & 2) {	// MR1

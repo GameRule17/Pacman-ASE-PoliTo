@@ -5,24 +5,30 @@ int pacman_y = PACMAN_INITIAL_Y;
 
 int direction = 0;
 
+int numPowerPillsGenerated = 0;
+
 void setPacman() {
 	board[pacman_y][pacman_x] = PACMAN;
 }
 
-void generatePowerPills() {
-	int randX, randY;
-	int numPowerPills = 0;
+void tryGenerationPowerPills() {
+	int xCoord, yCoord;
+	const unsigned char PROBABILITY_TRESHOLD = 60;	//60%
 	
-	// Repeat until 6 standard pills aren't converted into power pills
-	while (numPowerPills < NUM_POWER_PILLS) {
-		randX = rand() % LENGTH; // Generating random X value from 0 to LENGTH=28
-		randY = rand() % HEIGTH; // Generating random Y value from 0 to LENGTH=31
-		
-		// Check if that cell is a standard pill
-		if (board[randY][randX] == STANDARD_PILL) {
-			board[randY][randX] = POWER_PILL;
-			numPowerPills++;
-		}	
+	unsigned char temp = (get_timer_value(1) ^ get_RIT_value()) % 101;
+	
+	if((temp > PROBABILITY_TRESHOLD) || (numPowerPillsGenerated >= NUM_POWER_PILLS)) {
+		return;
+	}
+	
+	srand(get_timer_value(1) ^ get_RIT_value() ^ MAGIC_RANDOM_NUMBER);
+	xCoord = rand() % LENGTH;
+	yCoord = rand() % HEIGTH;
+	
+	if(board[yCoord][xCoord] == STANDARD_PILL) {
+		board[yCoord][xCoord] = POWER_PILL;
+		Draw_Circle(alignCoordX(xCoord), alignCoordY(yCoord), POWER_PILL_RADIUS, Magenta);
+		numPowerPillsGenerated++;
 	}
 }
 

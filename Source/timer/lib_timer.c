@@ -142,8 +142,8 @@ uint32_t init_timer ( uint8_t timer_num, uint32_t Prescaler, uint8_t MatchReg, u
 			LPC_TIM0->MR3 = TimerInterval;
 			LPC_TIM0->MCR |= SRImatchReg << 3*MatchReg;	
 		}
-		NVIC_EnableIRQ(TIMER0_IRQn);				/* enable timer interrupts*/
-		NVIC_SetPriority(TIMER0_IRQn, 0);			/* more priority than buttons */
+		NVIC_EnableIRQ(TIMER0_IRQn);				
+		NVIC_SetPriority(TIMER0_IRQn, 4);			/* TIMER PRIORITY for COUNTDOWN set to 4 */
 		return (0);
 	}
 	else if ( timer_num == 1 )
@@ -167,7 +167,7 @@ uint32_t init_timer ( uint8_t timer_num, uint32_t Prescaler, uint8_t MatchReg, u
 			LPC_TIM1->MCR |= SRImatchReg << 3*MatchReg;	
 		}		
 		NVIC_EnableIRQ(TIMER1_IRQn);
-		NVIC_SetPriority(TIMER1_IRQn, 4);	/* less priority than buttons and timer0 */
+		NVIC_SetPriority(TIMER1_IRQn, 5);	/* TIMER PRIORITY for PACMAN MOVEMENT set to 5 */
 		return (0);
 	}
 	else if ( timer_num == 2 )
@@ -191,7 +191,7 @@ uint32_t init_timer ( uint8_t timer_num, uint32_t Prescaler, uint8_t MatchReg, u
 			LPC_TIM2->MCR |= SRImatchReg << 3*MatchReg;	
 		}		
 		NVIC_EnableIRQ(TIMER2_IRQn);
-		NVIC_SetPriority(TIMER2_IRQn, 4);	/* less priority than buttons and timer0 */
+		NVIC_SetPriority(TIMER2_IRQn, 4);	/* TIMER NOT USED */
 		return (0);
 	}
 	else if ( timer_num == 3 )
@@ -215,13 +215,33 @@ uint32_t init_timer ( uint8_t timer_num, uint32_t Prescaler, uint8_t MatchReg, u
 			LPC_TIM3->MCR |= SRImatchReg << 3*MatchReg;	
 		}		
 		NVIC_EnableIRQ(TIMER3_IRQn);
-		NVIC_SetPriority(TIMER3_IRQn, 4);	/* less priority than buttons and timer0 */
+		NVIC_SetPriority(TIMER3_IRQn, 4);	/* TIMER NOT USED */
 		return (0);
 	}
 	
 	return (1);
 }
 
+int get_timer_value(int timerNum) {
+	int value;
+	switch (timerNum) {
+		case 0:
+			value = LPC_TIM0->TC;
+		break;
+		case 1:
+			value = LPC_TIM1->TC;
+		break;
+		case 2:
+			value = LPC_TIM2->TC;
+		break;
+		case 3:
+			value = LPC_TIM3->TC;
+		break;
+		default:
+		break;
+	}
+	return value;
+}
 
 
 /******************************************************************************

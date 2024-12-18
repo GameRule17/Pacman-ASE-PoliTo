@@ -122,6 +122,13 @@ void Draw_Lives(int initialX, int initialY) {
 	}
 }
 
+/*
+	Main drawing function, depending on drawAllBoardFlag:
+		when drawAllBoardFlag = 1 -> the ENTIRE board is drawn
+			 drawAllBoardFlag = 0 -> only the box behind the pause is re-drawn
+	this is done for optimizing purposes
+*/
+
 void Draw_Board(int drawAllBoardFlag){
     int i, j, current_value;
 	int x_pos, y_pos;
@@ -135,7 +142,6 @@ void Draw_Board(int drawAllBoardFlag){
 	
 	if (firstBoardGenerated == 0) {
 		setPacman();
-		generatePowerPills();
 		firstBoardGenerated = 1;
 	}
 	
