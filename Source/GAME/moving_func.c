@@ -1,11 +1,20 @@
 #include "GAME/moving_func.h"
 
+/* **************************** FUNCTION PROTOTYPES **************************** */
+void setPacman();
+void tryGenerationPowerPills();
+int movePacman(int direction);
+
+
+/* **************************** GLOBAL VARIABLES **************************** */
+
 int pacman_x = PACMAN_INITIAL_X;
 int pacman_y = PACMAN_INITIAL_Y;
 
 int direction = 0;
-
 int numPowerPillsGenerated = 0;
+
+/* **************************** FUNCTION DEFINED **************************** */
 
 void setPacman() {
 	board[pacman_y][pacman_x] = PACMAN;
@@ -13,26 +22,22 @@ void setPacman() {
 
 void tryGenerationPowerPills() {
 	int xCoord, yCoord;
-	const unsigned char PROBABILITY_TRESHOLD = 60;	//60%
 	
 	unsigned char temp = (get_timer_value(1) ^ get_RIT_value()) % 101;
 	
-	if((temp > PROBABILITY_TRESHOLD) || (numPowerPillsGenerated >= NUM_POWER_PILLS)) {
-		return;
-	}
-	
-	srand(get_timer_value(1) ^ get_RIT_value() ^ MAGIC_RANDOM_NUMBER);
-	xCoord = rand() % LENGTH;
-	yCoord = rand() % HEIGTH;
-	
-	if(board[yCoord][xCoord] == STANDARD_PILL) {
-		board[yCoord][xCoord] = POWER_PILL;
-		Draw_Circle(alignCoordX(xCoord), alignCoordY(yCoord), POWER_PILL_RADIUS, Magenta);
-		numPowerPillsGenerated++;
+	if((temp <= PROBABILITY_TRESHOLD) && (numPowerPillsGenerated < NUM_POWER_PILLS)) {
+		srand(get_timer_value(1) ^ get_RIT_value() ^ MAGIC_RANDOM_NUMBER);
+		xCoord = rand() % LENGTH;
+		yCoord = rand() % HEIGTH;
+		
+		if(board[yCoord][xCoord] == STANDARD_PILL) {
+			board[yCoord][xCoord] = POWER_PILL;
+			drawPowerPill(xCoord, yCoord);
+			numPowerPillsGenerated++;
+		}
 	}
 }
 
-// Function that moves Pacman
 int movePacman(int direction) {
 	int new_Y, prev_Y, new_X, prev_X;
 	int new_board_value;
@@ -63,12 +68,10 @@ int movePacman(int direction) {
 		
 		new_board_value = board[new_Y][new_X];
 
-		// Check if the new position is valid 
-		// (no walls and no out of matrix's bounds
+		// Check if the new position is valid == no walls and no out of matrix's bounds
 		if (new_Y >= 0 && new_Y < HEIGTH && new_X >= 0 && new_X < LENGTH && new_board_value != WALL) {
 			
 			// Update matrix's values
-			
 			switch(new_board_value){
 				case TP_LEFT:
 					// Teleport from LEFT to RIGHT
@@ -81,12 +84,12 @@ int movePacman(int direction) {
 				case STANDARD_PILL:
 					updateScoreAndCheckVictory(10);
 					// Draw the new score
-					Draw_Score();
+					drawScore();
 				break;
 				case POWER_PILL:
 					updateScoreAndCheckVictory(50);
 					// Draw the new score
-					Draw_Score();
+					drawScore();
 				break;
 				default:
 				break;
@@ -96,7 +99,7 @@ int movePacman(int direction) {
 			board[prev_Y][prev_X] = VOID; // Null previous position
 			
 			// Now draw also the move on the display
-			Draw_Pacman_Move(new_Y, new_X, prev_Y, prev_X);
+			drawPacmanMove(new_Y, new_X, prev_Y, prev_X);
 			
 			pacman_y = new_Y;
 			pacman_x = new_X;

@@ -5,13 +5,8 @@
 
 #define MAX_TIME_SECONDS 60
 #define INITIAL_NUM_LIFES 1
-#define MAX_NUM_LIFES 5
+#define MAX_NUM_LIFES 3
 #define MAX_NUM_PILLS 240
-
-#define X_POSITION_LIVES_IN_GAME 85
-#define Y_POSITION_LIVES_IN_GAME 300
-#define X_POSITION_LIVES_IN_GAMEOVER 85
-#define Y_POSITION_LIVES_IN_GAMEOVER 170
 
 extern int countdown;
 extern int num_lifes;

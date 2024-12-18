@@ -5,8 +5,8 @@
 #define HEIGTH 31
 #define RATIO 8 // Every point in the matrix is represented as 8x8pixels in the real board
 
-#define SIDE_PADDING 8 // +8 = #pixel dist from the side edge
-#define UPPER_PADDING 32 // +32 = #pixel dist from the upper edge
+#define SIDE_PADDING 8 // #pixel dist from the side edge
+#define UPPER_PADDING 32 // #pixel dist from the upper edge
 
 // Items represented in the game matrix as this number codes
 #define VOID 0
@@ -21,9 +21,6 @@
 #define PACMAN_INITIAL_Y 14
 
 #define NUM_POWER_PILLS 6
-
-#define PACMAN_RADIUS 3 // Radius of circle representing pacman
-#define POWER_PILL_RADIUS 2 // Radius of circle representing power pills
 
 extern char board[HEIGTH][LENGTH];
 

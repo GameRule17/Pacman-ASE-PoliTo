@@ -5,16 +5,26 @@
 #import "GLCD.h"
 #import "GAME/game_state.h"
 
-void Draw_Wall(int current_X, int current_Y, int color);
-void Draw_Point(int current_X, int current_Y, int color);
-void Draw_Circle(int center_X, int center_Y, int radius, int color);
+#define PACMAN_RADIUS 3 // Radius of circle representing pacman
+#define POWER_PILL_RADIUS 2 // Radius of circle representing power pills
 
-void Draw_Board(int drawAllBoardFlag);
-void Draw_Pacman_Move(int newX, int newY, int prevX, int prevY);
-void Draw_Lives(int initialX, int initialY);
-void Draw_Game_Over_Screen();
-void Draw_Game_Ended();
-void Draw_Pause_Box();
-void Draw_Victory_Screen();
+#define X_POSITION_LIVES_IN_GAME 85
+#define Y_POSITION_LIVES_IN_GAME 300
+#define X_POSITION_LIVES_IN_GAMEOVER 85
+#define Y_POSITION_LIVES_IN_GAMEOVER 170
+
+/* *************** PUBLIC FUNCTIONS *************** */
+
+void drawScore();
+void drawTimeLeft();
+void drawLives(int initialX, int initialY);
+void drawPowerPill(int xCoord, int yCoord);
+void drawBoard(int drawAllBoardFlag);
+void drawPacmanMove(int newY, int newX, int prevY, int prevX);
+void drawGameOverScreen();
+void clearGameOverScreen();
+void drawGameEndedScreen();
+void drawPauseBox();
+void drawVictoryScreen();
 
 #endif /* end __DRAWING_FUNC */

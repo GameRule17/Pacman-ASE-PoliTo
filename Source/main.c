@@ -109,7 +109,7 @@ int main(void)
 	
 	
 	/* Area Code */
-	Draw_Board(1);
+	drawBoard(1);
 	setGamePause();
 	
 	
