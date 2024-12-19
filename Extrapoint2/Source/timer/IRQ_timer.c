@@ -60,6 +60,7 @@ void TIMER1_IRQHandler (void)
 		
 		tryGenerationPowerPills();
 		movePacman(direction);
+		moveBlinky();
 		
 		LPC_TIM1->IR = 1;			//clear interrupt flag
 	}

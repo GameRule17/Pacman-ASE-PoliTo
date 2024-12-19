@@ -2,17 +2,22 @@
 
 /* **************************** FUNCTION PROTOTYPES **************************** */
 void setPacman();
+void setBlinky();
+void changeSRand();
 void tryGenerationPowerPills();
 uint16_t movePacman(uint16_t direction);
-
+int calculateWeightedDistance(uint16_t pacman_X, uint16_t pacman_Y, uint16_t blinky_X, uint16_t blinky_Y);
+void moveBlinky();
 
 /* **************************** GLOBAL VARIABLES **************************** */
 
 uint16_t pacman_x = PACMAN_INITIAL_X;
 uint16_t pacman_y = PACMAN_INITIAL_Y;
 
+uint16_t blinky_x = BLINKY_INITIAL_X;
+uint16_t blinky_y = BLINKY_INITIAL_Y;
+
 uint16_t direction = 0;
-uint16_t numPowerPillsGenerated = 0;
 
 /* **************************** FUNCTION DEFINED **************************** */
 
@@ -20,13 +25,22 @@ void setPacman() {
 	board[pacman_y][pacman_x] = PACMAN;
 }
 
+void setBlinky() {
+	board[blinky_y][blinky_x] = BLINKY;
+}
+
+void changeSRand() {
+	srand(get_timer_value(1) ^ get_RIT_value() ^ MAGIC_RANDOM_NUMBER);
+}
+
 void tryGenerationPowerPills() {
-	int xCoord, yCoord;
+	uint16_t xCoord, yCoord;
+	static uint16_t numPowerPillsGenerated = 0;
 	
 	int temp = (get_timer_value(1) ^ get_RIT_value()) % 101;
 	
-	if((temp <= PROBABILITY_TRESHOLD) && (numPowerPillsGenerated < NUM_POWER_PILLS)) {
-		srand(get_timer_value(1) ^ get_RIT_value() ^ MAGIC_RANDOM_NUMBER);
+	if((temp <= PROBABILITY_TRESHOLD_PILLS) && (numPowerPillsGenerated < NUM_POWER_PILLS)) {
+		changeSRand();
 		xCoord = rand() % LENGTH;
 		yCoord = rand() % HEIGTH;
 		
@@ -125,3 +139,76 @@ uint16_t movePacman(uint16_t direction) {
     return 0; // Movement not completed
 }
 
+/*
+	Heuristic used to calculate distance between Pacman and Blinky
+	it uses both manhattan and euclidean distance with balanced weights.
+	In my opinion, it was too heavy to implement an A* search.
+*/
+
+int calculateWeightedDistance(uint16_t pacman_X, uint16_t pacman_Y, uint16_t blinky_X, uint16_t blinky_Y) {
+	int manhattan = abs(pacman_X - blinky_X) + abs(pacman_Y - blinky_Y);
+    double euclidean = sqrt(pow((pacman_X - blinky_X), 2) + pow((pacman_Y - blinky_Y), 2));
+    return 0.5 * manhattan + 0.5 * euclidean; // Balanced weights
+}
+
+void moveBlinky() {
+	uint16_t bestX;
+	uint16_t bestY;
+	uint16_t localWeightedDistance;
+	uint16_t bestWeightedDistance = 999;
+	uint16_t randomPercentage;
+	
+	uint8_t i;
+	
+	static uint8_t previousBlinkyCellValue = VOID;
+	static uint16_t previousX = 0;
+	static uint16_t previousY = 0;
+	
+	uint16_t vectorOfMovements[4][2] = {
+		{blinky_x, blinky_y+1}, // -> Down move
+		{blinky_x+1, blinky_y}, // -> Right move
+		{blinky_x, blinky_y-1}, // -> Up move
+		{blinky_x-1, blinky_y}, // -> Left move
+	};
+	
+	/*
+		Check for all the possible combination of movements
+		if they are valid == no walls and no out of matrix's bounds
+		For the one valid, calculate the Weighted Distance and save the best coords 
+	*/
+	
+	for (i = 0; i<4; i++) {
+		if (vectorOfMovements[i][1] >= 0 && vectorOfMovements[i][1] < HEIGTH && // No out of HEIGTH bounds
+			vectorOfMovements[i][0] >= 0 && vectorOfMovements[i][0] < LENGTH && // No out of LENGTH bounds
+			board[vectorOfMovements[i][1]][vectorOfMovements[i][0]] != WALL) {  // Wall not encountered
+			
+			localWeightedDistance = calculateWeightedDistance(pacman_x, pacman_y, vectorOfMovements[i][0], vectorOfMovements[i][1]);
+		
+			// This is done to prefer every other movement besides going back in the previous position
+			// If no other movement is available, then Blinky will move back
+			if (previousX == vectorOfMovements[i][0] && previousY == vectorOfMovements[i][1]) {
+				localWeightedDistance = localWeightedDistance + 100; // Negative factor
+			}
+			
+			if (localWeightedDistance < bestWeightedDistance) {
+				bestWeightedDistance = localWeightedDistance;
+				bestX = vectorOfMovements[i][0];
+				bestY = vectorOfMovements[i][1];
+			}
+		}	
+	}
+	
+	// Draw the move
+	drawBlinkyMove(bestY, bestX, blinky_y, blinky_x, previousBlinkyCellValue);
+	
+	// Save the move onto the matrix board
+	board[blinky_y][blinky_x] = previousBlinkyCellValue;	// Restore previous position value
+	previousBlinkyCellValue = board[bestY][bestX]; 			// Save position value for next movement
+	board[bestY][bestX] = BLINKY; 							// Set new blinky's position
+	
+	previousX = blinky_x;
+	previousY = blinky_y;
+	
+	blinky_y = bestY;
+	blinky_x = bestX;
+}

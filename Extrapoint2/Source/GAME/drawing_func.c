@@ -15,6 +15,7 @@ void drawTimeLeft();
 void drawLives(uint16_t initialX, uint16_t initialY);
 void drawPowerPill(uint16_t xCoord, uint16_t yCoord);
 void drawBoard(uint16_t drawAllBoardFlag);
+void drawElementOnBoard(uint16_t xCoord, uint16_t yCoord, uint8_t element);
 void drawPacmanMove(uint16_t newY, uint16_t newX, uint16_t prevY, uint16_t prevX);
 void drawGameOverScreen();
 void clearGameOverScreen();
@@ -24,7 +25,6 @@ void drawVictoryScreen();
 
 /* **************************** GLOBAL VARIABLES **************************** */
 
-int firstBoardGenerated = 0;
 
 /* ******************** GENERIC DRAW FUNCTIONS ******************** */
 
@@ -149,6 +149,31 @@ void drawPowerPill(uint16_t xCoord, uint16_t yCoord) {
 	drawCircle(alignCoordX(xCoord), alignCoordY(yCoord), POWER_PILL_RADIUS, Magenta);
 }
 
+void drawElementOnBoard(uint16_t xCoord, uint16_t yCoord, uint8_t element) {
+	uint16_t xCoordAligned = alignCoordX(xCoord);
+	uint16_t yCoordAligned = alignCoordY(yCoord);
+	
+	switch(element){ 
+		case WALL:
+			drawWall(xCoordAligned, yCoordAligned, Blue);
+		break;
+		case STANDARD_PILL:
+			drawPoint(xCoordAligned, yCoordAligned, Magenta);
+		break;
+		case POWER_PILL:
+			drawCircle(xCoordAligned, yCoordAligned, POWER_PILL_RADIUS, Magenta);
+		break;
+		case BLINKY:
+			drawCircle(xCoordAligned, yCoordAligned, PACMAN_RADIUS, Red);
+		break;
+		case PACMAN:
+			drawCircle(xCoordAligned, yCoordAligned, PACMAN_RADIUS, Yellow);
+		break;
+		default:
+		break;
+	}
+}
+
 /*
 	Main drawing function, depending on drawAllBoardFlag:
 		when drawAllBoardFlag = 1 -> the ENTIRE board is drawn
@@ -157,10 +182,11 @@ void drawPowerPill(uint16_t xCoord, uint16_t yCoord) {
 */
 
 void drawBoard(uint16_t drawAllBoardFlag){
-    uint16_t i, j, current_value;
-	uint16_t x_pos, y_pos;
+    uint16_t i, j;
 	uint16_t newStartingJ = 0, newStartingI = 0;
 	uint16_t addPaddingI = 0;
+	
+	static uint8_t firstBoardGenerated = 0;
 	
 	drawTitle();
 	drawScore();
@@ -169,6 +195,7 @@ void drawBoard(uint16_t drawAllBoardFlag){
 	
 	if (firstBoardGenerated == 0) {
 		setPacman();
+		setBlinky();
 		firstBoardGenerated = 1;
 	}
 	
@@ -180,36 +207,12 @@ void drawBoard(uint16_t drawAllBoardFlag){
  
     for(i = newStartingI; i < HEIGTH - newStartingI - addPaddingI; i++){
         for(j = newStartingJ; j < LENGTH - newStartingJ; j++){
-            current_value = board[i][j];
-			x_pos = alignCoordX(j);
-			y_pos = alignCoordY(i);
-			
+
 			if (drawAllBoardFlag == 0) {
-				drawWall(x_pos, y_pos, Black);
+				drawWall(alignCoordX(j), alignCoordY(i), Black);
 			}
-           
-            switch(current_value){ 
-                case WALL:
-                    drawWall(x_pos, y_pos, Blue);
-                break;
-                case STANDARD_PILL:
-                    drawPoint(x_pos, y_pos, Magenta);
-				break;
-				case POWER_PILL:
-                    drawCircle(x_pos, y_pos, POWER_PILL_RADIUS, Magenta);
-				break;
-//				case TP_LEFT:
-//					  drawWall(x_pos, y_pos, Cyan);
-//				break;
-//				case TP_RIGHT:
-//					  drawWall(x_pos, y_pos, Cyan);
-				break;
-				case PACMAN:
-					drawCircle(x_pos, y_pos, PACMAN_RADIUS, Yellow);
-				break;
-                default:
-                break;
-            }
+			
+			drawElementOnBoard(j, i, board[i][j]);
         }
     }
 }
@@ -222,6 +225,15 @@ void drawPacmanMove(uint16_t newY, uint16_t newX, uint16_t prevY, uint16_t prevX
     drawCircle(alignCoordX(newX), alignCoordY(newY), PACMAN_RADIUS, Yellow);
 }
 
+void drawBlinkyMove(uint16_t newY, uint16_t newX, uint16_t prevY, uint16_t prevX, uint8_t prevValue) {
+	// Reset the previous position drawing a black circle
+	drawCircle(alignCoordX(prevX), alignCoordY(prevY), PACMAN_RADIUS, Black);
+	// Draw the previous value on the previous position
+	drawElementOnBoard(prevX, prevY, prevValue);
+	
+	// Draw Blinky on the new position
+	drawCircle(alignCoordX(newX), alignCoordY(newY), PACMAN_RADIUS, Red);
+}
 
 void drawGameOverScreen() {
 	LCD_Clear(Black);
@@ -234,7 +246,7 @@ void drawGameOverScreen() {
 }
 
 void clearGameOverScreen() {
-	// Only a rect over the Game Over texts is drawn
+	// Just a black rect over the Game Over texts
 	drawRectWithBorder(35,130,170,100,Black,Black);
 }
 

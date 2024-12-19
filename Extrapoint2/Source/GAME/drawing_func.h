@@ -72,6 +72,7 @@ void drawLives(uint16_t initialX, uint16_t initialY);
 void drawPowerPill(uint16_t xCoord, uint16_t yCoord);
 void drawBoard(uint16_t drawAllBoardFlag);
 void drawPacmanMove(uint16_t newY, uint16_t newX, uint16_t prevY, uint16_t prevX);
+void drawBlinkyMove(uint16_t newY, uint16_t newX, uint16_t prevY, uint16_t prevX, uint8_t prevValue);
 void drawGameOverScreen();
 void clearGameOverScreen();
 void drawGameEndedScreen();

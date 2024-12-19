@@ -7,6 +7,7 @@
  3: Power Pill
  4: TP-Left
  5: TP-Right
+ 8: Blinky-Ghost
  9: Pacman
 */
 

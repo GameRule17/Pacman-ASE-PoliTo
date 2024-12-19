@@ -17,10 +17,14 @@
 #define POWER_PILL 3
 #define TP_LEFT 4
 #define TP_RIGHT 5
+#define BLINKY 8
 #define PACMAN 9
 
 #define PACMAN_INITIAL_X 14
 #define PACMAN_INITIAL_Y 14
+
+#define BLINKY_INITIAL_X 2
+#define BLINKY_INITIAL_Y 1
 
 #define NUM_POWER_PILLS 6
 
