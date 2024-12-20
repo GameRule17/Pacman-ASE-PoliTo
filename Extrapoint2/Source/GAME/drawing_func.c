@@ -154,6 +154,9 @@ void drawElementOnBoard(uint16_t xCoord, uint16_t yCoord, uint8_t element) {
 	uint16_t yCoordAligned = alignCoordY(yCoord);
 	
 	switch(element){ 
+		case VOID:
+			drawWall(xCoordAligned, yCoordAligned, Black);
+		break;
 		case WALL:
 			drawWall(xCoordAligned, yCoordAligned, Blue);
 		break;
@@ -162,6 +165,9 @@ void drawElementOnBoard(uint16_t xCoord, uint16_t yCoord, uint8_t element) {
 		break;
 		case POWER_PILL:
 			drawCircle(xCoordAligned, yCoordAligned, POWER_PILL_RADIUS, Magenta);
+		break;
+		case CAGE_DOOR:
+			drawWall(xCoordAligned, yCoordAligned, Magenta);
 		break;
 		case BLINKY:
 			drawCircle(xCoordAligned, yCoordAligned, PACMAN_RADIUS, Red);

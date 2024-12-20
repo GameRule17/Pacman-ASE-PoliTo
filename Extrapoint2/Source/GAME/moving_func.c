@@ -8,6 +8,7 @@ void tryGenerationPowerPills();
 uint16_t movePacman(uint16_t direction);
 int calculateWeightedDistance(uint16_t pacman_X, uint16_t pacman_Y, uint16_t blinky_X, uint16_t blinky_Y);
 void moveBlinky();
+void freeBlinkyAnimation();
 
 /* **************************** GLOBAL VARIABLES **************************** */
 
@@ -19,6 +20,8 @@ uint16_t blinky_y = BLINKY_INITIAL_Y;
 
 uint16_t direction = 0;
 
+uint8_t isBlinkyFreeFlag = 0;
+
 /* **************************** FUNCTION DEFINED **************************** */
 
 void setPacman() {
@@ -27,6 +30,7 @@ void setPacman() {
 
 void setBlinky() {
 	board[blinky_y][blinky_x] = BLINKY;
+	isBlinkyFreeFlag = 0; // Need to do free Blinky animation
 }
 
 void changeSRand() {
@@ -85,7 +89,10 @@ uint16_t movePacman(uint16_t direction) {
 		new_board_value = board[new_Y][new_X];
 
 		// Check if the new position is valid == no walls and no out of matrix's bounds
-		if (new_Y >= 0 && new_Y < HEIGTH && new_X >= 0 && new_X < LENGTH && new_board_value != WALL) {
+		if (new_Y >= 0 && new_Y < HEIGTH && 
+			new_X >= 0 && new_X < LENGTH && 
+			new_board_value != WALL &&
+			new_board_value != CAGE_DOOR) {
 			
 			// Update matrix's values
 			switch(new_board_value){
@@ -151,16 +158,70 @@ int calculateWeightedDistance(uint16_t pacman_X, uint16_t pacman_Y, uint16_t bli
     return 0.5 * manhattan + 0.5 * euclidean; // Balanced weights
 }
 
+void freeBlinkyAnimation() {
+	static uint8_t i = 0;
+	switch(i) {
+		case 0:
+			// Move 1 cell up blinky
+			board[blinky_y][blinky_x] = VOID;
+			board[blinky_y-1][blinky_x] = BLINKY;
+			drawBlinkyMove(blinky_y-1, blinky_x, blinky_y, blinky_x, VOID);
+			blinky_y--;
+			i++;
+		break;
+		case 1:
+			// Open cage
+			board[CAGE_DOOR_1_Y][CAGE_DOOR_1_X] = VOID;
+			board[CAGE_DOOR_2_Y][CAGE_DOOR_2_X] = VOID;
+			drawElementOnBoard(CAGE_DOOR_1_X, CAGE_DOOR_1_Y, VOID);
+			drawElementOnBoard(CAGE_DOOR_2_X, CAGE_DOOR_2_Y, VOID);
+			i++;
+		break;
+		case 2:
+			// Move 1 cell up blinky
+			board[blinky_y][blinky_x] = VOID;
+			board[blinky_y-1][blinky_x] = BLINKY;
+			drawBlinkyMove(blinky_y-1, blinky_x, blinky_y, blinky_x, VOID);
+			blinky_y--;
+			i++;
+		break;
+		case 3:
+			// Move 1 cell up blinky
+			board[blinky_y][blinky_x] = VOID;
+			board[blinky_y-1][blinky_x] = BLINKY;
+			drawBlinkyMove(blinky_y-1, blinky_x, blinky_y, blinky_x, CAGE_DOOR);
+			
+			blinky_y--;
+			i++;
+		break;
+		case 4:
+			// Close cage
+			board[CAGE_DOOR_1_Y][CAGE_DOOR_1_X] = CAGE_DOOR;
+			board[CAGE_DOOR_2_Y][CAGE_DOOR_2_X] = CAGE_DOOR;
+			drawElementOnBoard(CAGE_DOOR_1_X, CAGE_DOOR_1_Y, CAGE_DOOR);
+			drawElementOnBoard(CAGE_DOOR_2_X, CAGE_DOOR_2_Y, CAGE_DOOR);
+			i++;
+		break;
+		case 5:
+			// Blinky is now free
+			isBlinkyFreeFlag = 1;
+			// Reset
+			i = 0;
+		break;
+		default:
+		break;
+	}
+}
+
 void moveBlinky() {
 	uint16_t bestX;
 	uint16_t bestY;
 	uint16_t localWeightedDistance;
 	uint16_t bestWeightedDistance = 999;
-	uint16_t randomPercentage;
 	
 	uint8_t i;
 	
-	static uint8_t previousBlinkyCellValue = VOID;
+	static uint8_t previousBlinkyCellValue = STANDARD_PILL;
 	static uint16_t previousX = 0;
 	static uint16_t previousY = 0;
 	
@@ -176,24 +237,28 @@ void moveBlinky() {
 		if they are valid == no walls and no out of matrix's bounds
 		For the one valid, calculate the Weighted Distance and save the best coords 
 	*/
-	
 	for (i = 0; i<4; i++) {
-		if (vectorOfMovements[i][1] >= 0 && vectorOfMovements[i][1] < HEIGTH && // No out of HEIGTH bounds
-			vectorOfMovements[i][0] >= 0 && vectorOfMovements[i][0] < LENGTH && // No out of LENGTH bounds
-			board[vectorOfMovements[i][1]][vectorOfMovements[i][0]] != WALL) {  // Wall not encountered
+		
+		uint16_t iX = vectorOfMovements[i][0];
+		uint16_t iY = vectorOfMovements[i][1];
+		
+		if (iY >= 0 && iY < HEIGTH && // No out of HEIGTH bounds
+			iX >= 0 && iX < LENGTH && // No out of LENGTH bounds
+			board[iY][iX] != WALL &&  // Wall not encountered
+			board[iY][iX] != CAGE_DOOR) {  
 			
-			localWeightedDistance = calculateWeightedDistance(pacman_x, pacman_y, vectorOfMovements[i][0], vectorOfMovements[i][1]);
+			localWeightedDistance = calculateWeightedDistance(pacman_x, pacman_y, iX, iY);
 		
 			// This is done to prefer every other movement besides going back in the previous position
 			// If no other movement is available, then Blinky will move back
-			if (previousX == vectorOfMovements[i][0] && previousY == vectorOfMovements[i][1]) {
+			if (previousX == iX && previousY == iY) {
 				localWeightedDistance = localWeightedDistance + 100; // Negative factor
 			}
 			
 			if (localWeightedDistance < bestWeightedDistance) {
 				bestWeightedDistance = localWeightedDistance;
-				bestX = vectorOfMovements[i][0];
-				bestY = vectorOfMovements[i][1];
+				bestX = iX;
+				bestY = iY;
 			}
 		}	
 	}

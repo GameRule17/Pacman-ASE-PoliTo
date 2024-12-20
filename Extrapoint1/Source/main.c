@@ -39,9 +39,9 @@ extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emul
 #include "led/led.h"
 #include "timer/timer.h"
 
-
 	/* User Imports */
 #include "GAME/drawing_func.h"
+#import "GAME/game_state.h"
 	
 int main(void)
 {

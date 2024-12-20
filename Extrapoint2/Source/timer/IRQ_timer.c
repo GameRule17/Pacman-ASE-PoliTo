@@ -60,7 +60,11 @@ void TIMER1_IRQHandler (void)
 		
 		tryGenerationPowerPills();
 		movePacman(direction);
-		moveBlinky();
+		if (isBlinkyFreeFlag == 0) {
+			freeBlinkyAnimation();
+		} else {
+			moveBlinky();
+		}
 		
 		LPC_TIM1->IR = 1;			//clear interrupt flag
 	}

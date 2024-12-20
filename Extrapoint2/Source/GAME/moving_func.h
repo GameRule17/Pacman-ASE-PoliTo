@@ -12,15 +12,25 @@
 #define J_LEFT_KEY 3
 #define J_RIGHT_KEY 4
 
+/*
+	Power pill generation using real board is much faster,
+	so a lower treshold is set
+*/
+#ifdef SIMULATOR
 #define PROBABILITY_TRESHOLD_PILLS 60
+#else
+#define PROBABILITY_TRESHOLD_PILLS 10
+#endif
 #define MAGIC_RANDOM_NUMBER 1103515245
 
 extern uint16_t direction;
+extern uint8_t isBlinkyFreeFlag;
 
 void setPacman();
 void setBlinky();
 uint16_t movePacman(uint16_t direction);
 void moveBlinky();
+void freeBlinkyAnimation();
 void tryGenerationPowerPills();
 
 #endif /* end __MOVING_FUNC */

@@ -9,7 +9,15 @@
 #define J_LEFT_KEY 3
 #define J_RIGHT_KEY 4
 
+/*
+	Power pill generation using real board is much faster,
+	so a lower treshold is set
+*/
+#ifdef SIMULATOR
 #define PROBABILITY_TRESHOLD 60
+#else
+#define PROBABILITY_TRESHOLD 10
+#endif
 #define MAGIC_RANDOM_NUMBER 1103515245
 
 extern uint16_t direction;

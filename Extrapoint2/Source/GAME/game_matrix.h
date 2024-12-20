@@ -17,16 +17,22 @@
 #define POWER_PILL 3
 #define TP_LEFT 4
 #define TP_RIGHT 5
+#define CAGE_DOOR 6
 #define BLINKY 8
 #define PACMAN 9
 
-#define PACMAN_INITIAL_X 14
-#define PACMAN_INITIAL_Y 14
+#define PACMAN_INITIAL_X 6
+#define PACMAN_INITIAL_Y 26
 
-#define BLINKY_INITIAL_X 2
-#define BLINKY_INITIAL_Y 1
+#define BLINKY_INITIAL_X 14
+#define BLINKY_INITIAL_Y 14
 
 #define NUM_POWER_PILLS 6
+
+#define CAGE_DOOR_1_X 13
+#define CAGE_DOOR_1_Y 12
+#define CAGE_DOOR_2_X 14
+#define CAGE_DOOR_2_Y 12
 
 extern uint8_t board[HEIGTH][LENGTH];
 
