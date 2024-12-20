@@ -13,10 +13,7 @@ void checkVictory();
 uint16_t countdown = MAX_TIME_SECONDS;
 uint16_t num_lifes = INITIAL_NUM_LIFES;
 uint16_t score = 0;
-uint16_t threshold = 1000;
 uint16_t game_pause = 1;
-uint16_t num_eated_pills = 0;
-uint8_t pacman_movement_completed = 0;
 
 /* ******************** GAME STATE FUNCTIONS ******************** */
 
@@ -63,6 +60,8 @@ void updateCountdown() {
 }
 
 void updateScore(uint16_t addValue) {
+	static uint16_t threshold = 1000;
+	
 	score = score + addValue;
 	
 	// To manage adding a new life every 1000 points obtained
@@ -74,6 +73,8 @@ void updateScore(uint16_t addValue) {
 }
 
 void checkVictory() {
+	static uint16_t num_eated_pills = 0;
+	
 	num_eated_pills++;
 	if (num_eated_pills == MAX_NUM_PILLS) {
 		disable_timer(0);

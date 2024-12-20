@@ -4,6 +4,7 @@
 #import "GAME/game_matrix.h"
 #import "GLCD.h"
 #import "GAME/game_state.h"
+#include <stdio.h> /*for sprintf*/
 
 #define PACMAN_RADIUS 3 // Radius of circle representing pacman
 #define POWER_PILL_RADIUS 2 // Radius of circle representing power pills

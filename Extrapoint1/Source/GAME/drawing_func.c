@@ -1,5 +1,4 @@
 #import "GAME/drawing_func.h"
-#include <stdio.h> /*for sprintf*/
 
 /* **************************** FUNCTION PROTOTYPES **************************** */
 
@@ -23,8 +22,6 @@ void drawPauseBox();
 void drawVictoryScreen();
 
 /* **************************** GLOBAL VARIABLES **************************** */
-
-int firstBoardGenerated = 0;
 
 /* ******************** GENERIC DRAW FUNCTIONS ******************** */
 
@@ -161,6 +158,8 @@ void drawBoard(uint16_t drawAllBoardFlag){
 	uint16_t x_pos, y_pos;
 	uint16_t newStartingJ = 0, newStartingI = 0;
 	uint16_t addPaddingI = 0;
+	
+	static uint8_t firstBoardGenerated = 0;
 	
 	drawTitle();
 	drawScore();

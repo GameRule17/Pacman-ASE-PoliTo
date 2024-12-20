@@ -12,7 +12,6 @@ uint16_t pacman_x = PACMAN_INITIAL_X;
 uint16_t pacman_y = PACMAN_INITIAL_Y;
 
 uint16_t direction = 0;
-uint16_t numPowerPillsGenerated = 0;
 
 /* **************************** FUNCTION DEFINED **************************** */
 
@@ -22,6 +21,8 @@ void setPacman() {
 
 void tryGenerationPowerPills() {
 	int xCoord, yCoord;
+	
+	static uint16_t numPowerPillsGenerated = 0;
 	
 	int temp = (get_timer_value(1) ^ get_RIT_value()) % 101;
 	

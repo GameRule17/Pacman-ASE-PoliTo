@@ -12,8 +12,6 @@ extern uint16_t countdown;
 extern uint16_t num_lifes;
 extern uint16_t score;
 extern uint16_t game_pause;
-extern uint16_t num_eated_pills;
-extern uint8_t pacman_movement_completed;
 
 void updateCountdown();
 void updateScore(uint16_t addValue);
