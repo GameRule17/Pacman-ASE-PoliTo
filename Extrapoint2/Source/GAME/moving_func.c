@@ -8,7 +8,7 @@ void tryGenerationPowerPills();
 uint16_t movePacman(uint16_t direction);
 int calculateWeightedDistance(uint16_t pacman_X, uint16_t pacman_Y, uint16_t blinky_X, uint16_t blinky_Y);
 void moveBlinky();
-void freeBlinkyAnimation();
+void freeBlinkyFromCage();
 
 /* **************************** GLOBAL VARIABLES **************************** */
 
@@ -18,9 +18,7 @@ uint16_t pacman_y = PACMAN_INITIAL_Y;
 uint16_t blinky_x = BLINKY_INITIAL_X;
 uint16_t blinky_y = BLINKY_INITIAL_Y;
 
-uint16_t direction = 0;
-
-uint8_t isBlinkyFreeFlag = 0;
+uint16_t direction = DIRECTION_STOP;
 
 /* **************************** FUNCTION DEFINED **************************** */
 
@@ -29,6 +27,8 @@ void setPacman() {
 }
 
 void setBlinky() {
+	blinky_x = BLINKY_INITIAL_X;
+	blinky_y = BLINKY_INITIAL_Y;
 	board[blinky_y][blinky_x] = BLINKY;
 	isBlinkyFreeFlag = 0; // Need to do free Blinky animation
 }
@@ -110,6 +110,8 @@ uint16_t movePacman(uint16_t direction) {
 				break;
 				case POWER_PILL:
 					sum_to_score = 50;
+					blinkyMode = BLINKY_FRIGHTENED_MODE;
+					timeBlinkyFrightened = 0;
 					flag_pill_eated = 1;
 				break;
 				default:
@@ -124,10 +126,7 @@ uint16_t movePacman(uint16_t direction) {
 			
 			// If a pill is eaten, update the new score and check victory
 			if (flag_pill_eated == 1) {
-				// Update and draw the new score 
 				updateScore(sum_to_score);
-				drawScore();
-				
 				checkVictory();
 				flag_pill_eated = 0;
 			}
@@ -139,7 +138,7 @@ uint16_t movePacman(uint16_t direction) {
 		} else {
 			// If a WALL is encountered, it's useless to continue trying going through it
 			// Better stopping pacman movement
-			direction = 0;
+			direction = DIRECTION_STOP;
 		}
 	}
 	
@@ -158,8 +157,8 @@ int calculateWeightedDistance(uint16_t pacman_X, uint16_t pacman_Y, uint16_t bli
     return 0.5 * manhattan + 0.5 * euclidean; // Balanced weights
 }
 
-void freeBlinkyAnimation() {
-	static uint8_t i = 0;
+void freeBlinkyFromCage() {
+	static int i = -30; // Blinky stays 3 second stopped before exiting the cage
 	switch(i) {
 		case 0:
 			// Move 1 cell up blinky
@@ -190,7 +189,6 @@ void freeBlinkyAnimation() {
 			board[blinky_y][blinky_x] = VOID;
 			board[blinky_y-1][blinky_x] = BLINKY;
 			drawBlinkyMove(blinky_y-1, blinky_x, blinky_y, blinky_x, CAGE_DOOR);
-			
 			blinky_y--;
 			i++;
 		break;
@@ -206,9 +204,11 @@ void freeBlinkyAnimation() {
 			// Blinky is now free
 			isBlinkyFreeFlag = 1;
 			// Reset
-			i = 0;
+			i = -30;
 		break;
 		default:
+			// Wait 3 seconds and start exit animation
+			i++;
 		break;
 	}
 }
@@ -216,8 +216,9 @@ void freeBlinkyAnimation() {
 void moveBlinky() {
 	uint16_t bestX;
 	uint16_t bestY;
-	uint16_t localWeightedDistance;
+	int localWeightedDistance;
 	uint16_t bestWeightedDistance = 999;
+	uint16_t worstWeightedDistance = 0;
 	
 	uint8_t i;
 	
@@ -242,23 +243,43 @@ void moveBlinky() {
 		uint16_t iX = vectorOfMovements[i][0];
 		uint16_t iY = vectorOfMovements[i][1];
 		
-		if (iY >= 0 && iY < HEIGTH && // No out of HEIGTH bounds
-			iX >= 0 && iX < LENGTH && // No out of LENGTH bounds
-			board[iY][iX] != WALL &&  // Wall not encountered
-			board[iY][iX] != CAGE_DOOR) {  
+		if (iY >= 0 && iY < HEIGTH     && 	// No out of HEIGTH bounds
+			iX >= 0 && iX < LENGTH     && 	// No out of LENGTH bounds
+			board[iY][iX] != WALL      &&  	// Wall not encountered
+			board[iY][iX] != CAGE_DOOR &&	// Cage-door is like a wall
+			board[iY][iX] != TP_LEFT   && 	// Blinky can't use teleports
+			board[iY][iX] != TP_RIGHT) {
 			
 			localWeightedDistance = calculateWeightedDistance(pacman_x, pacman_y, iX, iY);
-		
-			// This is done to prefer every other movement besides going back in the previous position
-			// If no other movement is available, then Blinky will move back
-			if (previousX == iX && previousY == iY) {
-				localWeightedDistance = localWeightedDistance + 100; // Negative factor
-			}
 			
-			if (localWeightedDistance < bestWeightedDistance) {
-				bestWeightedDistance = localWeightedDistance;
-				bestX = iX;
-				bestY = iY;
+			if (blinkyMode == BLINKY_CHASE_MODE) {
+				/* In CHASE MODE the optimal movement is the lowest distance */
+				
+				// This is done to prefer every other movement besides going back in the previous position
+				// If no other movement is available, then Blinky will move back
+				if (previousX == iX && previousY == iY) {
+					localWeightedDistance = localWeightedDistance + 100; // Negative factor
+				}
+				
+				if (localWeightedDistance < bestWeightedDistance) {
+					bestWeightedDistance = localWeightedDistance;
+					bestX = iX;
+					bestY = iY;
+				}
+			} else {
+				/* In FRIGHTENED MODE the optimal movement is the highest distance */
+				
+				// This is done to prefer every other movement besides going back in the previous position
+				// If no other movement is available, then Blinky will move back
+				if (previousX == iX && previousY == iY) {
+					localWeightedDistance = localWeightedDistance - 100; // Negative factor
+				}
+				
+				if (localWeightedDistance >= worstWeightedDistance) {
+					worstWeightedDistance = localWeightedDistance;
+					bestX = iX;
+					bestY = iY;
+				}
 			}
 		}	
 	}
@@ -266,14 +287,41 @@ void moveBlinky() {
 	// Draw the move
 	drawBlinkyMove(bestY, bestX, blinky_y, blinky_x, previousBlinkyCellValue);
 	
-	// Save the move onto the matrix board
-	board[blinky_y][blinky_x] = previousBlinkyCellValue;	// Restore previous position value
-	previousBlinkyCellValue = board[bestY][bestX]; 			// Save position value for next movement
-	board[bestY][bestX] = BLINKY; 							// Set new blinky's position
+	disable_timer(1);
+	// Check if Pacman and Blinky collide
+	if (bestY == pacman_y && bestX == pacman_x) {
+		// Set new Blinky's position on board
+		setBlinky();
+		// Update previousBlinkyCellValue 
+		previousBlinkyCellValue = board[CAGE_EXIT_Y][CAGE_EXIT_X];
+		
+		// Draw Pacman and Blinky with new position
+		drawBlinkyMove(BLINKY_INITIAL_Y, BLINKY_INITIAL_X, previousY, previousX, VOID);
+		drawElementOnBoard(pacman_x, pacman_y, PACMAN);
+		
+		if (blinkyMode == BLINKY_CHASE_MODE) {
+			removeOneLife();
+		} else {
+			updateScore(100);
+			blinkyMode = BLINKY_CHASE_MODE;
+		}
+	} else {
+		
+		// Save the move on the matrix board
+		board[blinky_y][blinky_x] = previousBlinkyCellValue;	// Restore previous position value
+		previousBlinkyCellValue = board[bestY][bestX]; 			// Save position value for next movement
+		// If they do not collide, complete movement on the board
+		board[bestY][bestX] = BLINKY; 							// Set new blinky's position
+		
+		previousX = blinky_x;
+		previousY = blinky_y;
+		
+		blinky_y = bestY;
+		blinky_x = bestX;
+	}
+	enable_timer(1);
+}
+
+void checkCollision() {
 	
-	previousX = blinky_x;
-	previousY = blinky_y;
-	
-	blinky_y = bestY;
-	blinky_x = bestX;
 }

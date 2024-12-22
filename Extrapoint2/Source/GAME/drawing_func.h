@@ -4,6 +4,7 @@
 #import "GAME/game_matrix.h"
 #import "GLCD.h"
 #import "GAME/game_state.h"
+#include <stdio.h> /*for sprintf*/
 
 #define PACMAN_RADIUS 3 // Radius of circle representing pacman
 #define POWER_PILL_RADIUS 2 // Radius of circle representing power pills
@@ -29,11 +30,6 @@
 #define X_GAME_OVER (DISPLAY_WIDTH-GAME_OVER_TEXT_SIZE)/2
 #define Y_GAME_OVER ((DISPLAY_HEIGTH-TEXT_HEIGHT)/2)-20
 
-// NO REMAINING LIVES Text screen positions
-#define NO_REMAINING_LIVES_TEXT_SIZE 18*SINGLE_CHARACTER_SIZE
-#define X_NO_REMAINING_LIVES (DISPLAY_WIDTH-NO_REMAINING_LIVES_TEXT_SIZE)/2
-#define Y_NO_REMAINING_LIVES DISPLAY_CENTER_Y_COORD
-
 // YOU LOST Text screen positions
 #define YOU_LOST_TEXT_SIZE 8*SINGLE_CHARACTER_SIZE
 #define X_YOU_LOST (DISPLAY_WIDTH-YOU_LOST_TEXT_SIZE)/2
@@ -54,15 +50,10 @@
 #define X_TO_RESUME (DISPLAY_WIDTH-TO_RESUME_SIZE)/2
 #define Y_TO_RESUME DISPLAY_CENTER_Y_COORD+15
 
-// REMAINING LIVES Text screen positions
-#define REMAINING_LIVES_SIZE 15*SINGLE_CHARACTER_SIZE
-#define X_REMAINING_LIVES (DISPLAY_WIDTH-REMAINING_LIVES_SIZE)/2
-#define Y_REMAINING_LIVES DISPLAY_CENTER_Y_COORD
-
-// PRESS KEY1 TO RESTART Text screen positions
-#define PRESS_KEY1_TO_RESTART_SIZE 21*SINGLE_CHARACTER_SIZE
-#define X_PRESS_KEY1_TO_RESTART (DISPLAY_WIDTH-PRESS_KEY1_TO_RESTART_SIZE)/2
-#define Y_PRESS_KEY1_TO_RESTART DISPLAY_CENTER_Y_COORD+50
+// VICTORY! Text screen positions
+#define VICTORY_SIZE 8*SINGLE_CHARACTER_SIZE
+#define X_VICTORY (DISPLAY_WIDTH-VICTORY_SIZE)/2
+#define Y_VICTORY DISPLAY_CENTER_Y_COORD
 
 /* ******************************* PUBLIC FUNCTIONS ******************************* */
 
@@ -74,8 +65,6 @@ void drawBoard(uint16_t drawAllBoardFlag);
 void drawElementOnBoard(uint16_t xCoord, uint16_t yCoord, uint8_t element);
 void drawPacmanMove(uint16_t newY, uint16_t newX, uint16_t prevY, uint16_t prevX);
 void drawBlinkyMove(uint16_t newY, uint16_t newX, uint16_t prevY, uint16_t prevX, uint8_t prevValue);
-void drawGameOverScreen();
-void clearGameOverScreen();
 void drawGameEndedScreen();
 void drawPauseBox();
 void drawVictoryScreen();

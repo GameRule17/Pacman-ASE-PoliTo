@@ -33,6 +33,8 @@
 #define CAGE_DOOR_1_Y 12
 #define CAGE_DOOR_2_X 14
 #define CAGE_DOOR_2_Y 12
+#define CAGE_EXIT_X 14
+#define CAGE_EXIT_Y 11
 
 extern uint8_t board[HEIGTH][LENGTH];
 

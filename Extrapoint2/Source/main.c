@@ -33,7 +33,6 @@ extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emul
 
 
 	/* Hardware Imports */
-
 #include "GLCD/GLCD.h" 
 #include "TouchPanel/TouchPanel.h"
 #include "led/led.h"

@@ -1,5 +1,4 @@
 #import "GAME/drawing_func.h"
-#include <stdio.h> /*for sprintf*/
 
 /* **************************** FUNCTION PROTOTYPES **************************** */
 
@@ -17,8 +16,6 @@ void drawPowerPill(uint16_t xCoord, uint16_t yCoord);
 void drawBoard(uint16_t drawAllBoardFlag);
 void drawElementOnBoard(uint16_t xCoord, uint16_t yCoord, uint8_t element);
 void drawPacmanMove(uint16_t newY, uint16_t newX, uint16_t prevY, uint16_t prevX);
-void drawGameOverScreen();
-void clearGameOverScreen();
 void drawGameEndedScreen();
 void drawPauseBox();
 void drawVictoryScreen();
@@ -237,18 +234,12 @@ void drawBlinkyMove(uint16_t newY, uint16_t newX, uint16_t prevY, uint16_t prevX
 	// Draw the previous value on the previous position
 	drawElementOnBoard(prevX, prevY, prevValue);
 	
-	// Draw Blinky on the new position
-	drawCircle(alignCoordX(newX), alignCoordY(newY), PACMAN_RADIUS, Red);
-}
-
-void drawGameOverScreen() {
-	LCD_Clear(Black);
-	// x and y were found simply testing different positions in order to look it pretty
-	GUI_Text(X_GAME_OVER,Y_GAME_OVER,(uint8_t *) "GAME OVER", Blue, Black);
-	
-	GUI_Text(X_REMAINING_LIVES,Y_REMAINING_LIVES,(uint8_t *) "REMAINING LIVES", Blue, Black);
-	drawLives(X_POSITION_LIVES_IN_GAMEOVER, Y_POSITION_LIVES_IN_GAMEOVER);
-	GUI_Text(X_PRESS_KEY1_TO_RESTART,Y_PRESS_KEY1_TO_RESTART,(uint8_t *) "Press KEY1 to Restart", Blue, Black);
+	// Draw Blinky on the new position	
+	if (blinkyMode == BLINKY_CHASE_MODE) {
+		drawCircle(alignCoordX(newX), alignCoordY(newY), PACMAN_RADIUS, Red);
+	} else {
+		drawCircle(alignCoordX(newX), alignCoordY(newY), PACMAN_RADIUS, Blue);
+	}
 }
 
 void clearGameOverScreen() {
@@ -260,7 +251,7 @@ void drawGameEndedScreen() {
 	LCD_Clear(Black);
 	// x and y were found simply testing different positions in order to look it pretty
 	GUI_Text(X_GAME_OVER, Y_GAME_OVER,(uint8_t *) "GAME OVER", Blue, Black);
-	GUI_Text(X_NO_REMAINING_LIVES, Y_NO_REMAINING_LIVES,(uint8_t *) "NO REMAINING LIVES", Blue, Black);
+	//GUI_Text(X_NO_REMAINING_LIVES, Y_NO_REMAINING_LIVES,(uint8_t *) "NO REMAINING LIVES", Blue, Black);
 	GUI_Text(X_YOU_LOST, Y_YOU_LOST,(uint8_t *) "YOU LOST!", Blue, Black);
 }
 
@@ -275,5 +266,5 @@ void drawPauseBox() {
 void drawVictoryScreen() {
 	LCD_Clear(Black);
 	// x and y were found simply testing different positions in order to look it pretty
-	GUI_Text(85, 130,(uint8_t *) "VICTORY!", Blue, Black);
+	GUI_Text(X_VICTORY, Y_VICTORY,(uint8_t *) "VICTORY!", Blue, Black);
 }

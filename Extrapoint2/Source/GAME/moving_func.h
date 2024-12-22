@@ -11,6 +11,7 @@
 #define J_DOWN_KEY 2
 #define J_LEFT_KEY 3
 #define J_RIGHT_KEY 4
+#define DIRECTION_STOP 0
 
 /*
 	Power pill generation using real board is much faster,
@@ -24,13 +25,12 @@
 #define MAGIC_RANDOM_NUMBER 1103515245
 
 extern uint16_t direction;
-extern uint8_t isBlinkyFreeFlag;
 
 void setPacman();
 void setBlinky();
 uint16_t movePacman(uint16_t direction);
 void moveBlinky();
-void freeBlinkyAnimation();
+void freeBlinkyFromCage();
 void tryGenerationPowerPills();
 
 #endif /* end __MOVING_FUNC */

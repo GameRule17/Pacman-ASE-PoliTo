@@ -31,7 +31,6 @@ extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emul
 //int const is_simulator = 1;
 #endif
 
-
 	/* Hardware Imports */
 
 #include "GLCD/GLCD.h" 

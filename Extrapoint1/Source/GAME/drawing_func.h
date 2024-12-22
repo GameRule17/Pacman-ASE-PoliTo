@@ -65,6 +65,11 @@
 #define X_PRESS_KEY1_TO_RESTART (DISPLAY_WIDTH-PRESS_KEY1_TO_RESTART_SIZE)/2
 #define Y_PRESS_KEY1_TO_RESTART DISPLAY_CENTER_Y_COORD+50
 
+// VICTORY! Text screen positions
+#define VICTORY_SIZE 8*SINGLE_CHARACTER_SIZE
+#define X_VICTORY (DISPLAY_WIDTH-VICTORY_SIZE)/2
+#define Y_VICTORY DISPLAY_CENTER_Y_COORD
+
 /* ******************************* PUBLIC FUNCTIONS ******************************* */
 
 void drawScore();

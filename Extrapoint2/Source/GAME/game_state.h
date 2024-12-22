@@ -5,15 +5,23 @@
 
 #define MAX_TIME_SECONDS 60
 #define INITIAL_NUM_LIFES 1
-#define MAX_NUM_LIFES 3
+#define MAX_NUM_LIFES 4
 #define MAX_NUM_PILLS 240
+
+#define BLINKY_CHASE_MODE 0
+#define BLINKY_FRIGHTENED_MODE 1
 
 extern uint16_t countdown;
 extern uint16_t num_lifes;
 extern uint16_t score;
 extern uint16_t game_pause;
+extern uint8_t blinkyMode;
+extern uint8_t isBlinkyFreeFlag;
+extern uint8_t timeBlinkyFrightened;
+extern uint8_t blinkySpeed;
 
 void updateCountdown();
+void removeOneLife();
 void updateScore(uint16_t addValue);
 void checkVictory();
 

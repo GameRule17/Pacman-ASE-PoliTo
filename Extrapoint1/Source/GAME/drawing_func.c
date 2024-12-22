@@ -256,5 +256,5 @@ void drawPauseBox() {
 void drawVictoryScreen() {
 	LCD_Clear(Black);
 	// x and y were found simply testing different positions in order to look it pretty
-	GUI_Text(85, 130,(uint8_t *) "VICTORY!", Blue, Black);
+	GUI_Text(X_VICTORY, Y_VICTORY,(uint8_t *) "VICTORY!", Blue, Black);
 }

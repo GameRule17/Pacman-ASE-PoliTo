@@ -27,6 +27,19 @@ void TIMER0_IRQHandler (void)
 		// MR0 counts every SECOND
 		updateCountdown();
 		
+		if (blinkyMode == BLINKY_FRIGHTENED_MODE) {
+			timeBlinkyFrightened++;
+			// If 10 seconds of frightened mode passed
+			if (timeBlinkyFrightened == 10) {
+				// Reset Blinky in chase mode
+				timeBlinkyFrightened = 0;
+				blinkyMode = BLINKY_CHASE_MODE;
+			}
+		}
+		
+		// Enhance Blinky speed every second
+		blinkySpeed++;
+		
 		LPC_TIM0->IR = 1;			//clear interrupt flag
 	}
 	else if(LPC_TIM0->IR & 2){	// MR1
@@ -57,14 +70,23 @@ void TIMER1_IRQHandler (void)
 {
 	if(LPC_TIM1->IR & 1) {		// MR0 
 		// your code
+		uint16_t threshold;
 		
 		tryGenerationPowerPills();
-		movePacman(direction);
+		
 		if (isBlinkyFreeFlag == 0) {
-			freeBlinkyAnimation();
+			freeBlinkyFromCage();
 		} else {
-			moveBlinky();
+			
+			// Make Blinky faster as the game progresses
+			changeSRand();
+			threshold = rand() % 101;
+			if (threshold < blinkySpeed) {
+				moveBlinky();
+			}
 		}
+		
+		movePacman(direction);
 		
 		LPC_TIM1->IR = 1;			//clear interrupt flag
 	}
