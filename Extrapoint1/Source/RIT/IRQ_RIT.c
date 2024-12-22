@@ -9,11 +9,9 @@
 *********************************************************************************************************/
 #include "LPC17xx.h"
 #include "RIT.h"
-#include "../led/led.h"
 #include "GAME/moving_func.h"
 
 	/* Variabili Globali Gestione De-Bouncing */
-	
 volatile int down_0 = 0;
 volatile int down_1 = 0;
 volatile int down_2 = 0;

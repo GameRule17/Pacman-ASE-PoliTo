@@ -1,8 +1,5 @@
 #include "button.h"
 #include "LPC17xx.h"
-
-
-#include "../led/led.h"
 #include "../timer/timer.h"
 
 

@@ -13,6 +13,7 @@ extern uint16_t num_lifes;
 extern uint16_t score;
 extern uint16_t game_pause;
 
+void startGame();
 void updateCountdown();
 void updateScore(uint16_t addValue);
 void checkVictory();

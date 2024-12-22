@@ -23,7 +23,6 @@
 
 
 	/* System Defines */
-	
 #include "LPC17xx.h"
 
 #ifdef SIMULATOR
@@ -32,14 +31,10 @@ extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emul
 #endif
 
 	/* Hardware Imports */
-
-#include "GLCD/GLCD.h" 
-#include "TouchPanel/TouchPanel.h"
-#include "led/led.h"
+#include "GLCD/GLCD.h"
 #include "timer/timer.h"
 
 	/* User Imports */
-#include "GAME/drawing_func.h"
 #import "GAME/game_state.h"
 	
 int main(void)
@@ -53,14 +48,6 @@ int main(void)
 	LCD_Initialization();
 	LCD_Clear(Black);
 	
-	// TouchScreen
-	//TP_Init();
-	//if (!is_simulator)
-	//	TouchPanel_Calibrate();
-	
-	// Led
-	//LED_init();
-	
 	// Buttons
 	BUTTON_init();
 	
@@ -72,12 +59,8 @@ int main(void)
 	enable_RIT();
 	
 	// Timers
-	LPC_SC -> PCONP |= (1 << 22);  			// Turn ON TIMER2 (anche da Wizard del System)
-	LPC_SC -> PCONP |= (1 << 23);  			// Turn ON TIMER3 (anche da Wizard del System)
-	
-	// ADC
-	//ADC_init();
-	
+	LPC_SC -> PCONP |= (1 << 22);  			// Turn ON TIMER2 
+	LPC_SC -> PCONP |= (1 << 23);  			// Turn ON TIMER3 
 	
 	/* Area Timers */
 	
@@ -101,9 +84,7 @@ int main(void)
 	
 	
 	/* Area Code */
-	drawBoard(1);
-	setGamePause();
-	
+	startGame();
 	
 	/* Area Loop */
 	

@@ -1,6 +1,7 @@
 #import "game_state.h"
 
 /* **************************** FUNCTION PROTOTYPES **************************** */
+void startGame();
 void setGamePause();
 void removeGamePause();
 void restartGame();
@@ -16,6 +17,11 @@ uint16_t score = 0;
 uint16_t game_pause = 1;
 
 /* ******************** GAME STATE FUNCTIONS ******************** */
+
+void startGame() {
+	drawBoard(1);
+	setGamePause();
+}
 
 void setGamePause() {
 	disable_timer(0);
