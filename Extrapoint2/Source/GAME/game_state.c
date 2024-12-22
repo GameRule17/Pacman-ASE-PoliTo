@@ -1,9 +1,9 @@
 #import "game_state.h"
 
 /* **************************** FUNCTION PROTOTYPES **************************** */
+void startGame();
 void setGamePause();
 void removeGamePause();
-void restartGame();
 void updateCountdown();
 void removeOneLife();
 void updateScore(uint16_t addValue);
@@ -19,9 +19,13 @@ uint16_t game_pause = 1;
 uint8_t isBlinkyFreeFlag = 0;
 uint8_t blinkyMode = BLINKY_CHASE_MODE;
 uint8_t timeBlinkyFrightened = 0;
-uint8_t blinkySpeed = 40;
+uint8_t blinkySpeed = BLINKY_INITIAL_SPEED;
 
 /* ******************** GAME STATE FUNCTIONS ******************** */
+void startGame() {
+	drawBoard(1);
+	setGamePause();
+}
 
 void setGamePause() {
 	disable_timer(0);
@@ -35,15 +39,6 @@ void removeGamePause() {
 	enable_timer(1);
 	game_pause = 0;
 	drawBoard(0);
-}
-
-void restartGame() {
-	clearGameOverScreen();
-	drawBoard(1);
-	setGamePause();
-	enableINT0();
-	countdown = MAX_TIME_SECONDS; // Reset countdown statistic
-	drawTimeLeft();
 }
 
 void updateCountdown() {

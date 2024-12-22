@@ -9,11 +9,8 @@
 *********************************************************************************************************/
 #include "LPC17xx.h"
 #include "RIT.h"
-#include "../led/led.h"
-#include "GAME/moving_func.h"
 
 	/* Variabili Globali Gestione De-Bouncing */
-	
 volatile int down_0 = 0;
 volatile int down_1 = 0;
 volatile int down_2 = 0;
@@ -24,26 +21,6 @@ volatile int J_down = 0;
 volatile int J_right = 0;
 volatile int J_left = 0;
 volatile int J_click = 0;
-
-volatile int enableKey1Usage = 0;
-volatile int enableInt0Usage = 1;
-
-void enableKEY1() {
-	enableKey1Usage = 1;
-}
-
-void disableKEY1() {
-	enableKey1Usage = 0;
-}
-
-void enableINT0() {
-	enableInt0Usage = 1;
-}
-
-void disableINT0() {
-	enableInt0Usage = 0;
-}
-
 
 /******************************************************************************
 ** Function name:		RIT_IRQHandler
@@ -64,12 +41,10 @@ void RIT_IRQHandler(void)
 				case 2:
 					// your code here
 					
-					if(enableInt0Usage == 1) {
-						if(game_pause == 1) {
-							removeGamePause();
-						} else {
-							setGamePause();
-						}
+					if(game_pause == 1) {
+						removeGamePause();
+					} else {
+						setGamePause();
 					}
 				
 					break;
@@ -92,12 +67,6 @@ void RIT_IRQHandler(void)
 			switch(down_1){
 				case 2:
 					// your code here
-					
-					if (enableKey1Usage == 1) {
-						restartGame();
-						disableKEY1();
-					}
-				
 					break;
 				default:
 					break;

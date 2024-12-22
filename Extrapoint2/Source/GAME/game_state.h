@@ -10,6 +10,7 @@
 
 #define BLINKY_CHASE_MODE 0
 #define BLINKY_FRIGHTENED_MODE 1
+#define BLINKY_INITIAL_SPEED 40 // From 40 to 100
 
 extern uint16_t countdown;
 extern uint16_t num_lifes;
@@ -20,6 +21,9 @@ extern uint8_t isBlinkyFreeFlag;
 extern uint8_t timeBlinkyFrightened;
 extern uint8_t blinkySpeed;
 
+void startGame();
+void setGamePause();
+void removeGamePause();
 void updateCountdown();
 void removeOneLife();
 void updateScore(uint16_t addValue);
