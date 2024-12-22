@@ -71,6 +71,7 @@ void TIMER1_IRQHandler (void)
 	if(LPC_TIM1->IR & 1) {		// MR0 
 		// your code
 		uint16_t threshold;
+		uint8_t theyCollided = 0;
 		
 		tryGenerationPowerPills();
 		
@@ -83,10 +84,15 @@ void TIMER1_IRQHandler (void)
 			threshold = rand() % 101;
 			if (threshold < blinkySpeed) {
 				moveBlinky();
+				theyCollided = checkCollision();
 			}
 		}
 		
-		movePacman(direction);
+		if (theyCollided == 0) {
+			movePacman(direction);
+			checkCollision();
+			theyCollided = 0;
+		}
 		
 		LPC_TIM1->IR = 1;			//clear interrupt flag
 	}

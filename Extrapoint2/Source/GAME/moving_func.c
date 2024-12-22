@@ -9,6 +9,7 @@ uint16_t movePacman(uint16_t direction);
 int calculateWeightedDistance(uint16_t pacman_X, uint16_t pacman_Y, uint16_t blinky_X, uint16_t blinky_Y);
 void moveBlinky();
 void freeBlinkyFromCage();
+uint8_t checkCollision();
 
 /* **************************** GLOBAL VARIABLES **************************** */
 
@@ -19,6 +20,7 @@ uint16_t blinky_x = BLINKY_INITIAL_X;
 uint16_t blinky_y = BLINKY_INITIAL_Y;
 
 uint16_t direction = DIRECTION_STOP;
+uint8_t previousBlinkyCellValue = STANDARD_PILL;
 
 /* **************************** FUNCTION DEFINED **************************** */
 
@@ -222,7 +224,6 @@ void moveBlinky() {
 	
 	uint8_t i;
 	
-	static uint8_t previousBlinkyCellValue = STANDARD_PILL;
 	static uint16_t previousX = 0;
 	static uint16_t previousY = 0;
 	
@@ -243,12 +244,13 @@ void moveBlinky() {
 		uint16_t iX = vectorOfMovements[i][0];
 		uint16_t iY = vectorOfMovements[i][1];
 		
-		if (iY >= 0 && iY < HEIGTH     && 	// No out of HEIGTH bounds
-			iX >= 0 && iX < LENGTH     && 	// No out of LENGTH bounds
-			board[iY][iX] != WALL      &&  	// Wall not encountered
-			board[iY][iX] != CAGE_DOOR &&	// Cage-door is like a wall
-			board[iY][iX] != TP_LEFT   && 	// Blinky can't use teleports
-			board[iY][iX] != TP_RIGHT) {
+		if (iY >= 0 && iY < HEIGTH &&        // No out of HEIGTH bounds
+			iX >= 0 && iX < LENGTH &&        // No out of LENGTH bounds
+			board[iY][iX] != WALL &&         // Wall not encountered
+			board[iY][iX] != CAGE_DOOR &&    // Cage-door is like a wall
+			// In this implementation Blinky can't use teleports
+			!(iY == TP_LEFT_ENTRANCE_Y && iX == TP_LEFT_ENTRANCE_X) &&
+			!(iY == TP_RIGHT_ENTRANCE_Y && iX == TP_RIGHT_ENTRANCE_X)) {
 			
 			localWeightedDistance = calculateWeightedDistance(pacman_x, pacman_y, iX, iY);
 			
@@ -286,17 +288,31 @@ void moveBlinky() {
 	
 	// Draw the move
 	drawBlinkyMove(bestY, bestX, blinky_y, blinky_x, previousBlinkyCellValue);
+		
+	// Save the move on the matrix board
+	board[blinky_y][blinky_x] = previousBlinkyCellValue;	// Restore previous position value
+	previousBlinkyCellValue = board[bestY][bestX]; 			// Save position value for next movement
+	board[bestY][bestX] = BLINKY; 							// Set new blinky's position
 	
-	disable_timer(1);
+	previousX = blinky_x;
+	previousY = blinky_y;
+	
+	blinky_y = bestY;
+	blinky_x = bestX;
+}
+
+uint8_t checkCollision() {
 	// Check if Pacman and Blinky collide
-	if (bestY == pacman_y && bestX == pacman_x) {
+	if (blinky_y == pacman_y && blinky_x == pacman_x) {
 		// Set new Blinky's position on board
 		setBlinky();
+		// Reset Pacman position to resolve overlap of objects
+		board[pacman_y][pacman_x] = PACMAN;
 		// Update previousBlinkyCellValue 
 		previousBlinkyCellValue = board[CAGE_EXIT_Y][CAGE_EXIT_X];
 		
 		// Draw Pacman and Blinky with new position
-		drawBlinkyMove(BLINKY_INITIAL_Y, BLINKY_INITIAL_X, previousY, previousX, VOID);
+		drawBlinkyMove(BLINKY_INITIAL_Y, BLINKY_INITIAL_X, blinky_y, blinky_x, VOID);
 		drawElementOnBoard(pacman_x, pacman_y, PACMAN);
 		
 		if (blinkyMode == BLINKY_CHASE_MODE) {
@@ -305,23 +321,7 @@ void moveBlinky() {
 			updateScore(100);
 			blinkyMode = BLINKY_CHASE_MODE;
 		}
-	} else {
-		
-		// Save the move on the matrix board
-		board[blinky_y][blinky_x] = previousBlinkyCellValue;	// Restore previous position value
-		previousBlinkyCellValue = board[bestY][bestX]; 			// Save position value for next movement
-		// If they do not collide, complete movement on the board
-		board[bestY][bestX] = BLINKY; 							// Set new blinky's position
-		
-		previousX = blinky_x;
-		previousY = blinky_y;
-		
-		blinky_y = bestY;
-		blinky_x = bestX;
+		return 1; // There was a collision
 	}
-	enable_timer(1);
-}
-
-void checkCollision() {
-	
+	return 0; // No collision happened
 }

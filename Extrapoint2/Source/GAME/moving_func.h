@@ -32,5 +32,6 @@ uint16_t movePacman(uint16_t direction);
 void moveBlinky();
 void freeBlinkyFromCage();
 void tryGenerationPowerPills();
+uint8_t checkCollision();
 
 #endif /* end __MOVING_FUNC */
