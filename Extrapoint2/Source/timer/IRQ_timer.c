@@ -10,7 +10,6 @@
 #include "LPC17xx.h"
 #include "timer.h"
 
-
 /******************************************************************************
 ** Function name:		Timer0_IRQHandler
 **
@@ -125,6 +124,8 @@ void TIMER2_IRQHandler (void)
 {
 	if(LPC_TIM2->IR & 1) {		// MR0 
 		// your code
+		playMusicSound(); // Background Game Music
+		
 		LPC_TIM2->IR = 1;			//clear interrupt flag
 	}
 	else if(LPC_TIM2->IR & 2){	// MR1
@@ -156,6 +157,8 @@ void TIMER3_IRQHandler (void)
 {
 	if(LPC_TIM3->IR & 1) {		// MR0 
 		// your code
+		playMusicSoundDuration(); // Background Game Music
+		
 		LPC_TIM3->IR = 1;			//clear interrupt flag
 	}
 	else if(LPC_TIM3->IR & 2){	// MR1

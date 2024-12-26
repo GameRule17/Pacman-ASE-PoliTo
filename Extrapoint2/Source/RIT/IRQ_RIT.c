@@ -9,6 +9,7 @@
 *********************************************************************************************************/
 #include "LPC17xx.h"
 #include "RIT.h"
+#include "audio/music.h"
 
 	/* Variabili Globali Gestione De-Bouncing */
 volatile int down_0 = 0;
@@ -195,9 +196,8 @@ void RIT_IRQHandler(void)
 	
 	/////////////////////////////////////
 
-	//ADC_start_conversion();		/* ADC */ 
-	
-	// end ADC
+	// Background Game Music
+	playMusic();
 	
 	/////////////////////////////////////
 	

@@ -654,6 +654,31 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>audio</GroupName>
+          <Files>
+            <File>
+              <FileName>music.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\audio\music.c</FilePath>
+            </File>
+            <File>
+              <FileName>music.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\audio\music.h</FilePath>
+            </File>
+            <File>
+              <FileName>audio_reprod.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\audio\audio_reprod.c</FilePath>
+            </File>
+            <File>
+              <FileName>tracks.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\audio\tracks.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
@@ -1251,6 +1276,31 @@
               <FileName>game_state.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Source\GAME\game_state.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>audio</GroupName>
+          <Files>
+            <File>
+              <FileName>music.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\audio\music.c</FilePath>
+            </File>
+            <File>
+              <FileName>music.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\audio\music.h</FilePath>
+            </File>
+            <File>
+              <FileName>audio_reprod.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\audio\audio_reprod.c</FilePath>
+            </File>
+            <File>
+              <FileName>tracks.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\audio\tracks.c</FilePath>
             </File>
           </Files>
         </Group>

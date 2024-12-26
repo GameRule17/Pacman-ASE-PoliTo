@@ -13,6 +13,7 @@
 #include <stdint.h>
 #include "GAME/game_state.h"
 #include "GAME/moving_func.h"
+#include "../timer/timer.h"
 
 /* init_RIT.c */
 extern uint32_t init_RIT( uint32_t RITInterval );

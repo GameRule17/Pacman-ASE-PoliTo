@@ -56,10 +56,6 @@ int main(void)
 	// Joystick
 	joystick_init();
 	
-	// RIT
-	init_RIT(0x004C4B40);					// 50ms
-	enable_RIT();
-	
 	// Timers
 	LPC_SC -> PCONP |= (1 << 22);  			// Turn ON TIMER2
 	LPC_SC -> PCONP |= (1 << 23);  			// Turn ON TIMER3
@@ -76,23 +72,25 @@ int main(void)
 	init_timer(1, 0, 0, 3, 0x2625A0); // 0,1*25000000=0x2625A0
 	//enable_timer(1);
 	
-		//TIMER2
-	//init_timer(2, 0, 0, 3, 0x);
-	//enable_timer(2);
+		//TIMER2 - In music.c
 	
-		//TIMER3
-	//init_timer(3, 0, 0, 3, 0x);
-	//enable_timer(3);
-	
+		//TIMER3 - In music.c
 	
 	/* Area Code */
 	startGame();
 	
+	// RIT
+	init_RIT(0x004C4B40);					// 50ms
+	enable_RIT();
 	
 	/* Area Loop */
 	
 	LPC_SC->PCON |= 0x1;					/* power-down mode */
-	LPC_SC->PCON &= ~(0x2);						
+	LPC_SC->PCON &= ~(0x2);
+
+	LPC_PINCON->PINSEL1 |= (1<<21);
+	LPC_PINCON->PINSEL1 &= ~(1<<20);
+	LPC_GPIO0->FIODIR |= (1<<26);
 	
 	while (1) {
 		__ASM("wfi");
