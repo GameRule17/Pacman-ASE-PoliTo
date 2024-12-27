@@ -36,7 +36,7 @@ void setBlinky() {
 }
 
 void changeSRand() {
-	srand(get_timer_value(1) ^ get_RIT_value() ^ MAGIC_RANDOM_NUMBER);
+	srand(get_timer_value(1) ^ get_timer_value(2) ^ get_timer_value(3) ^ get_RIT_value() ^ MAGIC_RANDOM_NUMBER);
 }
 
 void tryGenerationPowerPills() {
@@ -60,9 +60,9 @@ void tryGenerationPowerPills() {
 
 uint16_t movePacman(uint16_t direction) {
 	uint16_t new_Y, prev_Y, new_X, prev_X;
-	uint16_t new_board_value;
-	uint8_t sum_to_score;
-	uint8_t flag_pill_eated = 0;
+	uint16_t newBoardValue;
+	uint8_t sumToScore;
+	uint8_t flagPillEated = 0;
 	
 	// Pacman moves if and only if the game is NOT in PAUSE mode
 	if(game_pause == 0) {
@@ -88,16 +88,16 @@ uint16_t movePacman(uint16_t direction) {
 				return 0; // Invalid direction
 		}
 		
-		new_board_value = board[new_Y][new_X];
+		newBoardValue = board[new_Y][new_X];
 
 		// Check if the new position is valid == no walls and no out of matrix's bounds
 		if (new_Y >= 0 && new_Y < HEIGTH && 
 			new_X >= 0 && new_X < LENGTH && 
-			new_board_value != WALL &&
-			new_board_value != CAGE_DOOR) {
+			newBoardValue != WALL &&
+			newBoardValue != CAGE_DOOR) {
 			
 			// Update matrix's values
-			switch(new_board_value){
+			switch(newBoardValue){
 				case TP_LEFT:
 					// Teleport from LEFT to RIGHT
 					new_X = new_X+LENGTH-2;
@@ -107,14 +107,15 @@ uint16_t movePacman(uint16_t direction) {
 					new_X = new_X-LENGTH+2;
 				break;
 				case STANDARD_PILL:
-					sum_to_score = 10;
-					flag_pill_eated = 1;
+					sumToScore = 10;
+					flagPillEated = 1;
 				break;
 				case POWER_PILL:
-					sum_to_score = 50;
+					sumToScore = 50;
+					soundToPlay = SOUND_SUPER_PILL_EATED;
 					blinkyMode = BLINKY_FRIGHTENED_MODE;
 					timeBlinkyFrightened = 0;
-					flag_pill_eated = 1;
+					flagPillEated = 1;
 				break;
 				default:
 				break;
@@ -127,10 +128,10 @@ uint16_t movePacman(uint16_t direction) {
 			drawPacmanMove(new_Y, new_X, prev_Y, prev_X);
 			
 			// If a pill is eaten, update the new score and check victory
-			if (flag_pill_eated == 1) {
-				updateScore(sum_to_score);
+			if (flagPillEated == 1) {
+				updateScore(sumToScore);
 				checkVictory();
-				flag_pill_eated = 0;
+				flagPillEated = 0;
 			}
 			
 			pacman_y = new_Y;

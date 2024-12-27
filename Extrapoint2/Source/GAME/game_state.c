@@ -61,6 +61,7 @@ void removeOneLife() {
 		disable_RIT(); // Disable using all types of buttons
 		drawGameEndedScreen(); // Game ended
 	} else {
+		soundToPlay = SOUND_LIFE_LOSED;
 		drawLives(X_POSITION_LIVES_IN_GAME, Y_POSITION_LIVES_IN_GAME);
 	}
 }
@@ -73,6 +74,7 @@ void updateScore(uint16_t addValue) {
 	// To manage adding a new life every 1000 points obtained
 	if (score >= threshold) {
 		num_lifes = num_lifes + 1;
+		soundToPlay = SOUND_LIFE_GAINED;
 		drawLives(X_POSITION_LIVES_IN_GAME, Y_POSITION_LIVES_IN_GAME);
 		threshold = threshold + 1000;
 	}

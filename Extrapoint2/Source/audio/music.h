@@ -10,10 +10,14 @@
 
 #define SECOND 0x17D7840 * TIMERSCALER
 
-
 typedef char BOOL;
 #define TRUE 1
 #define FALSE 0
+
+#define SOUND_BACKGROUND_MUSIC 0
+#define SOUND_SUPER_PILL_EATED 1
+#define SOUND_LIFE_LOSED 2
+#define SOUND_LIFE_GAINED 3
 
 typedef enum note_durations
 {
@@ -60,17 +64,16 @@ typedef enum frequencies
     f2 = 18326    // 87.31Hz
 } FREQUENCY;
 
-
-
-typedef struct 
-{
+typedef struct {
 	FREQUENCY freq;
 	NOTE_DURATION duration;
 } NOTE;
 
+extern uint8_t soundToPlay;
+
 void playNote(NOTE note);
 BOOL isNotePlaying(void);
-void playMusic();
+void playSoundEffect(uint8_t sound);
 void playMusicSound();
 void playMusicSoundDuration();
 

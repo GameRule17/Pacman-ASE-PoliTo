@@ -6,6 +6,7 @@
 
 #import "GAME/game_matrix.h"
 #import "GAME/drawing_func.h"
+#import "audio/music.h"
 
 #define J_UP_KEY 1
 #define J_DOWN_KEY 2

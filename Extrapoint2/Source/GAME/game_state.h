@@ -2,6 +2,7 @@
 #define __GAME_STATE
 
 #import "GAME/drawing_func.h"
+#import "audio/music.h"
 
 #define MAX_TIME_SECONDS 60
 #define INITIAL_NUM_LIFES 1

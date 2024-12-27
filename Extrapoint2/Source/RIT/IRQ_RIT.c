@@ -197,7 +197,7 @@ void RIT_IRQHandler(void)
 	/////////////////////////////////////
 
 	// Background Game Music
-	playMusic();
+	playSoundEffect(soundToPlay);
 	
 	/////////////////////////////////////
 	
