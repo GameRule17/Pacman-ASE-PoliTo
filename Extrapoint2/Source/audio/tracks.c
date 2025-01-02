@@ -81,47 +81,6 @@ const uint16_t gainLifeSoundSize = sizeof(gainLifeSound) / sizeof(gainLifeSound[
 
 uint8_t soundToPlay = SOUND_BACKGROUND_MUSIC;
 
-//void playSoundEffect(uint8_t sound) {
-//    static uint16_t currentNote = 0;
-//    static uint16_t ticks = 0;
-//	uint16_t length;
-//	const NOTE *effect;
-//	
-//	switch(sound) {
-//		case SOUND_BACKGROUND_MUSIC:
-//			effect = backgroundMusic;
-//			length = backgroundMusicSize;
-//		break;
-//		case SOUND_SUPER_PILL_EATED:
-//			effect = superPillEatedSound;
-//			length = superPillEatedSoundSize;
-//		break;
-//		case SOUND_LIFE_LOSED:
-//			effect = loseLifeSound;
-//			length = loseLifeSoundSize;
-//		case SOUND_LIFE_GAINED:
-//			effect = gainLifeSound;
-//			length = gainLifeSoundSize;
-//		default:
-//		break;
-//	}
-
-//    if (!isNotePlaying()) {
-//        ++ticks;
-//        if (ticks == UPTICKS) {
-//            ticks = 0;
-//            playNote(effect[currentNote++]);
-//        }
-//    }
-
-//    if (currentNote >= length) {
-//		// Restart backgound music
-//        currentNote = 0;
-//		ticks = 0;
-//		soundToPlay = SOUND_BACKGROUND_MUSIC;
-//    }
-//}
-
 void playSoundEffect(uint8_t sound) {
     static uint8_t currentSound = SOUND_BACKGROUND_MUSIC;
     static uint16_t currentNote = 0;
@@ -129,14 +88,12 @@ void playSoundEffect(uint8_t sound) {
     uint16_t length;
     const NOTE *effect;
 
-    // Cambia traccia se necessario
     if (currentSound != sound) {
         currentSound = sound;
         currentNote = 0;
         ticks = 0;
     }
 
-    // Seleziona la traccia attuale
     switch (currentSound) {
         case SOUND_BACKGROUND_MUSIC:
             effect = backgroundMusic;
@@ -149,16 +106,15 @@ void playSoundEffect(uint8_t sound) {
         case SOUND_LIFE_LOSED:
             effect = loseLifeSound;
             length = loseLifeSoundSize;
-            break; // Manca il break nel codice originale
+            break;
         case SOUND_LIFE_GAINED:
             effect = gainLifeSound;
             length = gainLifeSoundSize;
             break;
         default:
-            return; // Uscita se il suono è sconosciuto
+            return;
     }
 
-    // Riproduci la nota successiva
     if (!isNotePlaying()) {
         ++ticks;
         if (ticks == UPTICKS) {
@@ -167,12 +123,10 @@ void playSoundEffect(uint8_t sound) {
         }
     }
 
-    // Reset della traccia quando finisce
     if (currentNote >= length) {
         currentNote = 0;
         ticks = 0;
 
-        // Torna alla musica di sottofondo dopo un effetto
         if (currentSound != SOUND_BACKGROUND_MUSIC) {
             currentSound = SOUND_BACKGROUND_MUSIC;
 			soundToPlay = SOUND_BACKGROUND_MUSIC;
