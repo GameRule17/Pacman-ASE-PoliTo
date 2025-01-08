@@ -12,9 +12,9 @@ void checkVictory();
 /* **************************** GLOBAL VARIABLES **************************** */
 
 uint16_t countdown = MAX_TIME_SECONDS;
-uint16_t num_lifes = INITIAL_NUM_LIFES;
+uint16_t numLives = INITIAL_numLives;
 uint16_t score = 0;
-uint16_t game_pause = 1;
+uint16_t gamePause = 1;
 
 /* ******************** GAME STATE FUNCTIONS ******************** */
 
@@ -26,14 +26,14 @@ void startGame() {
 void setGamePause() {
 	disable_timer(0);
 	disable_timer(1);
-	game_pause = 1;
+	gamePause = 1;
 	drawPauseBox();
 }
 
 void removeGamePause() {
 	enable_timer(0);
 	enable_timer(1);
-	game_pause = 0;
+	gamePause = 0;
 	drawBoard(0);
 }
 
@@ -51,8 +51,8 @@ void updateCountdown() {
 	if(countdown == 0) {
 		disable_timer(0);
 		disable_timer(1);
-		num_lifes--;
-		if(num_lifes == 0) {
+		numLives--;
+		if(numLives == 0) {
 			disable_RIT(); // Disable using all types of buttons
 			drawGameEndedScreen(); // Game ended with no more lives left
 		} else {
@@ -72,7 +72,7 @@ void updateScore(uint16_t addValue) {
 	
 	// To manage adding a new life every 1000 points obtained
 	if (score >= threshold) {
-		num_lifes = num_lifes + 1;
+		numLives = numLives + 1;
 		drawLives(X_POSITION_LIVES_IN_GAME, Y_POSITION_LIVES_IN_GAME);
 		threshold = threshold + 1000;
 	}

@@ -46,7 +46,7 @@ uint16_t movePacman(uint16_t direction) {
 	uint8_t flag_pill_eated = 0;
 	
 	// Pacman moves if and only if the game is NOT in PAUSE mode
-	if(game_pause == 0) {
+	if(gamePause == 0) {
 		prev_Y = pacman_y;
 		new_Y = pacman_y;
 		prev_X = pacman_x;

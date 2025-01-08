@@ -58,9 +58,9 @@ int main(void)
 	init_RIT(0x004C4B40);					// 50ms
 	enable_RIT();
 	
-	// Timers
-	LPC_SC -> PCONP |= (1 << 22);  			// Turn ON TIMER2 
-	LPC_SC -> PCONP |= (1 << 23);  			// Turn ON TIMER3 
+	// Other timers
+	//LPC_SC -> PCONP |= (1 << 22);  			// Turn ON TIMER2 
+	//LPC_SC -> PCONP |= (1 << 23);  			// Turn ON TIMER3 
 	
 	/* Area Timers */
 	

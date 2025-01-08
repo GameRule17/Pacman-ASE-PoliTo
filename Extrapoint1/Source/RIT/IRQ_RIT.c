@@ -11,12 +11,12 @@
 #include "RIT.h"
 #include "GAME/moving_func.h"
 
-	/* Variabili Globali Gestione De-Bouncing */
+	/* Global Variables for De-Bouncing */
 volatile int down_0 = 0;
 volatile int down_1 = 0;
 volatile int down_2 = 0;
 
-	/* Variabili Globali */
+	/* Joystick and Key usage Global Variables */
 volatile int J_up = 0;
 volatile int J_down = 0;
 volatile int J_right = 0;
@@ -63,7 +63,7 @@ void RIT_IRQHandler(void)
 					// your code here
 					
 					if(enableInt0Usage == 1) {
-						if(game_pause == 1) {
+						if(gamePause == 1) {
 							removeGamePause();
 						} else {
 							setGamePause();

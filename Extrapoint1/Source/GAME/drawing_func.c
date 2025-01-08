@@ -100,11 +100,9 @@ void drawRectWithBorder(uint16_t x0, uint16_t y0, uint16_t length, uint16_t dept
 /* ******************** GAME DRAW FUNCTIONS ******************** */
 
 void drawTitle() {
-	// x=20 y=4 were found simply testing different positions in order to look it pretty
-	GUI_Text(20,4,(uint8_t *) "GAME OVER IN      SCORE", Blue, Black);
+	GUI_Text(X_GAME_OVER_IN,Y_GAME_OVER_IN,(uint8_t *) "GAME OVER IN      SCORE", Blue, Black);
 	
-	// x=60 y=285 were found simply testing different positions in order to look it pretty
-	GUI_Text(60,285,(uint8_t *) "REMAINING LIVES", Blue, Black);
+	GUI_Text(X_REMAINING_LIVES,Y_REMAINING_LIVES,(uint8_t *) "REMAINING LIVES", Blue, Black);
 }
 
 void drawScore() {
@@ -115,23 +113,22 @@ void drawScore() {
 	uint16_t score_conv_string[12];
 	sprintf((char *)score_conv_string, "%d", score);
 	
-	// x=170 y=16 were found simply testing different positions in order to look it pretty
-	GUI_Text(170,16,(uint8_t *) score_conv_string, Blue, Black);
+	GUI_Text(X_SCORE,Y_SCORE,(uint8_t *) score_conv_string, Blue, Black);
 }
 
 void drawTimeLeft() {
 	uint16_t count_down_conv_string[12];
 	sprintf((char *)count_down_conv_string, "%d    ", countdown);
 	
-	GUI_Text(50,16,(uint8_t *) count_down_conv_string, Blue, Black);
+	GUI_Text(X_TIME_LEFT,Y_TIME_LEFT,(uint8_t *) count_down_conv_string, Blue, Black);
 }
 
 void drawLives(uint16_t initialX, uint16_t initialY) {
 	int nextHeartDistance = 16;
 	int i = 0;
 	
-	for(i=0; i<MAX_NUM_LIFES; i++) {
-		if (i<num_lifes) {
+	for(i=0; i<MAX_numLives; i++) {
+		if (i<numLives) {
 			// For the actual lives a red heart is showed
 			drawHeart(initialX,initialY,7,Red);
 		} else {
@@ -248,7 +245,7 @@ void drawGameEndedScreen() {
 void drawPauseBox() {
 	drawRectWithBorder(64, 104, 112, 88, Black, Red);
 	// x and y were found simply testing different positions in order to look it pretty
-	GUI_Text(X_GAME_PAUSED, Y_GAME_PAUSED,(uint8_t *) "GAME PAUSED", Red, Black);
+	GUI_Text(X_gamePauseD, Y_gamePauseD,(uint8_t *) "GAME PAUSED", Red, Black);
 	GUI_Text(X_PRESS_INT0, Y_PRESS_INT0,(uint8_t *) "Press INT0", Red, Black);
 	GUI_Text(X_TO_RESUME, Y_TO_RESUME,(uint8_t *) "to resume", Red, Black);
 }
