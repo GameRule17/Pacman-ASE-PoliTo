@@ -34,7 +34,7 @@ typedef enum frequencies
 {
     a2b = 13729,  // 116.54Hz
     b2 = 12959,   // 123.47Hz
-    c3b = 12598,  // 127.00Hz (approssimato)
+    c3b = 12598,  // 127.00Hz
     c3 = 12231,   // 130.81Hz
     d3 = 10897,   // 146.83Hz
     e3 = 9708,    // 164.81Hz
