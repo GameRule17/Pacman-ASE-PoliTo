@@ -6,7 +6,7 @@ void setBlinky();
 void changeSRand();
 void tryGenerationPowerPills();
 uint16_t movePacman(uint16_t direction);
-int calculateWeightedDistance(uint16_t pacman_X, uint16_t pacman_Y, uint16_t blinky_X, uint16_t blinky_Y);
+uint16_t calculateWeightedDistance(uint16_t pacman_X, uint16_t pacman_Y, uint16_t blinky_X, uint16_t blinky_Y);
 void moveBlinky();
 void freeBlinkyFromCage();
 uint8_t checkCollision();
@@ -65,7 +65,7 @@ uint16_t movePacman(uint16_t direction) {
 	uint8_t flagPillEated = 0;
 	
 	// Pacman moves if and only if the game is NOT in PAUSE mode
-	if(game_pause == 0) {
+	if(gamePause == 0) {
 		prev_Y = pacman_y;
 		new_Y = pacman_y;
 		prev_X = pacman_x;
@@ -154,9 +154,9 @@ uint16_t movePacman(uint16_t direction) {
 	In my opinion, it was too heavy to implement an A* search.
 */
 
-int calculateWeightedDistance(uint16_t pacman_X, uint16_t pacman_Y, uint16_t blinky_X, uint16_t blinky_Y) {
-	int manhattan = abs(pacman_X - blinky_X) + abs(pacman_Y - blinky_Y);
-    double euclidean = sqrt(pow((pacman_X - blinky_X), 2) + pow((pacman_Y - blinky_Y), 2));
+uint16_t calculateWeightedDistance(uint16_t pacman_X, uint16_t pacman_Y, uint16_t blinky_X, uint16_t blinky_Y) {
+	short manhattan = (short)abs(pacman_X - blinky_X) + (short)abs(pacman_Y - blinky_Y);
+    short euclidean = sqrtf(pow((pacman_X - blinky_X), 2) + pow((pacman_Y - blinky_Y), 2)); // Note the usage of sqrtF for optimization purposes
     return 0.5 * manhattan + 0.5 * euclidean; // Balanced weights
 }
 

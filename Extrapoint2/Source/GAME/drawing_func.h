@@ -25,6 +25,19 @@
 
 #define DISPLAY_CENTER_Y_COORD (DISPLAY_HEIGTH-TEXT_HEIGHT)/2
 
+// REMAINING LIVES Text screen positions
+#define REMAINING_LIVES_SIZE 15*SINGLE_CHARACTER_SIZE
+#define X_REMAINING_LIVES (DISPLAY_WIDTH-REMAINING_LIVES_SIZE)/2
+#define Y_REMAINING_LIVES DISPLAY_HEIGTH-35
+
+// SCORE Text screen positions
+#define X_SCORE 170
+#define Y_SCORE 16
+
+// TIME_LEFT Text screen positions
+#define X_TIME_LEFT 50
+#define Y_TIME_LEFT 16
+
 // GAME OVER Text screen positions
 #define GAME_OVER_TEXT_SIZE 9*SINGLE_CHARACTER_SIZE
 #define X_GAME_OVER (DISPLAY_WIDTH-GAME_OVER_TEXT_SIZE)/2
@@ -36,9 +49,9 @@
 #define Y_YOU_LOST DISPLAY_CENTER_Y_COORD+20
 
 // GAME PAUSED Text screen positions
-#define GAME_PAUSED_SIZE 11*SINGLE_CHARACTER_SIZE
-#define X_GAME_PAUSED (DISPLAY_WIDTH-GAME_PAUSED_SIZE)/2
-#define Y_GAME_PAUSED DISPLAY_CENTER_Y_COORD-35
+#define gamePauseD_SIZE 11*SINGLE_CHARACTER_SIZE
+#define X_gamePauseD (DISPLAY_WIDTH-gamePauseD_SIZE)/2
+#define Y_gamePauseD DISPLAY_CENTER_Y_COORD-35
 
 // PRESS INT0 Text screen positions
 #define PRESS_INT0_SIZE 10*SINGLE_CHARACTER_SIZE
@@ -55,11 +68,16 @@
 #define X_VICTORY (DISPLAY_WIDTH-VICTORY_SIZE)/2
 #define Y_VICTORY DISPLAY_CENTER_Y_COORD
 
+// GAME OVER IN - SCORE Text screen positions
+#define GAME_OVER_IN_SIZE 23*SINGLE_CHARACTER_SIZE
+#define X_GAME_OVER_IN (DISPLAY_WIDTH-GAME_OVER_IN_SIZE)/2
+#define Y_GAME_OVER_IN 4
+
 /* ******************************* PUBLIC FUNCTIONS ******************************* */
 
-void drawScore();
-void drawTimeLeft();
-void drawLives(uint16_t initialX, uint16_t initialY);
+void drawScore(uint16_t);
+void drawTimeLeft(uint16_t countdown);
+void drawLives(uint8_t numLives, uint16_t initialX, uint16_t initialY);
 void drawPowerPill(uint16_t xCoord, uint16_t yCoord);
 void drawBoard(uint16_t drawAllBoardFlag);
 void drawElementOnBoard(uint16_t xCoord, uint16_t yCoord, uint8_t element);

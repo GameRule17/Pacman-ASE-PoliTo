@@ -12,9 +12,9 @@ void checkVictory();
 /* **************************** GLOBAL VARIABLES **************************** */
 
 uint16_t countdown = MAX_TIME_SECONDS;
-uint16_t num_lifes = INITIAL_NUM_LIFES+2;
+uint16_t numLives = INITIAL_numLives;
 uint16_t score = 0;
-uint16_t game_pause = 1;
+uint16_t gamePause = 1;
 
 uint8_t isBlinkyFreeFlag = 0;
 uint8_t blinkyMode = BLINKY_CHASE_MODE;
@@ -30,14 +30,14 @@ void startGame() {
 void setGamePause() {
 	disable_timer(0);
 	disable_timer(1);
-	game_pause = 1;
+	gamePause = 1;
 	drawPauseBox();
 }
 
 void removeGamePause() {
 	enable_timer(0);
 	enable_timer(1);
-	game_pause = 0;
+	gamePause = 0;
 	drawBoard(0);
 }
 
@@ -49,20 +49,24 @@ void updateCountdown() {
 		disable_RIT(); // Disable using all types of buttons
 		drawGameEndedScreen(); // Game ended
 	} else {
-		drawTimeLeft();
+		//drawTimeLeft();
+		// This is now done through CAN
 	}
 }
 
 void removeOneLife() {
-	num_lifes--;
-	if(num_lifes == 0) {
+	numLives--;
+	if(numLives == 0) {
+		// Game ended
+		gamePause = 1;
 		disable_timer(0);
 		disable_timer(1);
 		disable_RIT(); // Disable using all types of buttons
-		drawGameEndedScreen(); // Game ended
+		drawGameEndedScreen();
 	} else {
 		soundToPlay = SOUND_LIFE_LOSED;
-		drawLives(X_POSITION_LIVES_IN_GAME, Y_POSITION_LIVES_IN_GAME);
+		//drawLives(X_POSITION_LIVES_IN_GAME, Y_POSITION_LIVES_IN_GAME);
+		// This is now done through CAN
 	}
 }
 
@@ -73,13 +77,15 @@ void updateScore(uint16_t addValue) {
 	
 	// To manage adding a new life every 1000 points obtained
 	if (score >= threshold) {
-		num_lifes = num_lifes + 1;
+		numLives = numLives + 1;
 		soundToPlay = SOUND_LIFE_GAINED;
-		drawLives(X_POSITION_LIVES_IN_GAME, Y_POSITION_LIVES_IN_GAME);
+		//drawLives(X_POSITION_LIVES_IN_GAME, Y_POSITION_LIVES_IN_GAME);
+		// This is now done through CAN
 		threshold = threshold + 1000;
 	}
 	
-	drawScore();
+	//drawScore();
+	// This is now done through CAN
 }
 
 void checkVictory() {

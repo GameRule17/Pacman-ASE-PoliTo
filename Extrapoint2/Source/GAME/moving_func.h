@@ -19,7 +19,7 @@
 	so a lower treshold is set
 */
 #ifdef SIMULATOR
-#define PROBABILITY_TRESHOLD_PILLS 60
+#define PROBABILITY_TRESHOLD_PILLS 40
 #else
 #define PROBABILITY_TRESHOLD_PILLS 10
 #endif

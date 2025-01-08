@@ -24,6 +24,7 @@ void TIMER0_IRQHandler (void)
 	if(LPC_TIM0->IR & 1) {		// MR0 
 		// your code
 		// MR0 counts every SECOND
+		
 		updateCountdown();
 		
 		if (blinkyMode == BLINKY_FRIGHTENED_MODE) {
@@ -93,6 +94,9 @@ void TIMER1_IRQHandler (void)
 			theyCollided = 0;
 		}
 		
+		// Sending player game stats through CAN 
+		sendPlayerStatsUsingCAN(countdown, numLives, score);
+		
 		LPC_TIM1->IR = 1;			//clear interrupt flag
 	}
 	else if(LPC_TIM1->IR & 2) {	// MR1
@@ -124,7 +128,7 @@ void TIMER2_IRQHandler (void)
 {
 	if(LPC_TIM2->IR & 1) {		// MR0 
 		// your code
-		playMusicSound(); // Background Game Music
+		playMusicSound(); // Background Game Music or Sound Effects
 		
 		LPC_TIM2->IR = 1;			//clear interrupt flag
 	}
@@ -157,7 +161,7 @@ void TIMER3_IRQHandler (void)
 {
 	if(LPC_TIM3->IR & 1) {		// MR0 
 		// your code
-		playMusicSoundDuration(); // Background Game Music
+		playMusicSoundDuration(); // Background Game Music or Sound Effects
 		
 		LPC_TIM3->IR = 1;			//clear interrupt flag
 	}

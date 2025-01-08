@@ -679,6 +679,31 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>CAN</GroupName>
+          <Files>
+            <File>
+              <FileName>CAN.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\CAN\CAN.h</FilePath>
+            </File>
+            <File>
+              <FileName>IRQ_CAN.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\CAN\IRQ_CAN.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_CAN.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\CAN\lib_CAN.c</FilePath>
+            </File>
+            <File>
+              <FileName>CAN_func.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\CAN\CAN_func.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
@@ -1301,6 +1326,31 @@
               <FileName>tracks.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\audio\tracks.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>CAN</GroupName>
+          <Files>
+            <File>
+              <FileName>CAN.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\CAN\CAN.h</FilePath>
+            </File>
+            <File>
+              <FileName>IRQ_CAN.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\CAN\IRQ_CAN.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_CAN.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\CAN\lib_CAN.c</FilePath>
+            </File>
+            <File>
+              <FileName>CAN_func.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\CAN\CAN_func.c</FilePath>
             </File>
           </Files>
         </Group>

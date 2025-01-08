@@ -18,6 +18,7 @@
 
 //#include "../TouchPanel/TouchPanel.h"
 #include "LPC17xx.h"
+#include "GAME/drawing_func.h"
 
 #define STANDARD_FORMAT  0
 #define EXTENDED_FORMAT  1
@@ -43,6 +44,10 @@ void CAN_wrMsg         (uint32_t ctrl, CAN_msg *msg);
 void CAN_rdMsg         (uint32_t ctrl, CAN_msg *msg);
 void CAN_wrFilter      (uint32_t ctrl, uint32_t id, uint8_t filter_type);
 void CAN_Init 				 (void);
+
+/* Function define in module CAN_func.c to sent Player's stats data */
+void sendPlayerStatsUsingCAN(uint16_t countdown, uint8_t numLives, uint16_t score);
+void drawPlayerStatsReceivedByCAN(uint16_t CAN_countdown, uint8_t CAN_numLives, uint16_t CAN_score);
 
 extern CAN_msg       CAN_TxMsg;      /* CAN messge for sending */
 extern CAN_msg       CAN_RxMsg;      /* CAN message for receiving */                                

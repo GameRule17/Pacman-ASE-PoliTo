@@ -10,7 +10,6 @@ const uint16_t SinTable[45] = {
 
 void playMusicSound() {
 	static int sineticks=0;
-	/* DAC management */	
 	static int currentValue; 
 	currentValue = SinTable[sineticks];
 //	currentValue -= 410;

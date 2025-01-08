@@ -42,7 +42,7 @@ void RIT_IRQHandler(void)
 				case 2:
 					// your code here
 					
-					if(game_pause == 1) {
+					if(gamePause == 1) {
 						removeGamePause();
 					} else {
 						setGamePause();

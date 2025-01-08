@@ -56,6 +56,9 @@ int main(void)
 	// Joystick
 	joystick_init();
 	
+	// CAN
+	CAN_Init();
+	
 	// Timers
 	LPC_SC -> PCONP |= (1 << 22);  			// Turn ON TIMER2
 	LPC_SC -> PCONP |= (1 << 23);  			// Turn ON TIMER3
