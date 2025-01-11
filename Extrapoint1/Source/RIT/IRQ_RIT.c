@@ -223,12 +223,6 @@ void RIT_IRQHandler(void)
 	}	// end Joystick CLICK
 	
 	/////////////////////////////////////
-
-	//ADC_start_conversion();		/* ADC */ 
-	
-	// end ADC
-	
-	/////////////////////////////////////
 	
 	reset_RIT();
 	LPC_RIT->RICTRL |= 0x1;	/* clear interrupt flag */

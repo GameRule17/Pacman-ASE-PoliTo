@@ -8,6 +8,8 @@
 
 #define PACMAN_RADIUS 3 // Radius of circle representing pacman
 #define POWER_PILL_RADIUS 2 // Radius of circle representing power pills
+#define DRAW_ENTIRE_BOARD 1
+#define DRAW_BOARD_ONLY_BELOW_PAUSE_BOX 0
 
 /* ******************************* POSITION FOR OBJECTS ******************************* */
 
@@ -25,10 +27,14 @@
 
 #define DISPLAY_CENTER_Y_COORD (DISPLAY_HEIGTH-TEXT_HEIGHT)/2
 
-// REMAINING LIVES Text screen positions
+// REMAINING LIVES Text in play screen
 #define REMAINING_LIVES_SIZE 15*SINGLE_CHARACTER_SIZE
 #define X_REMAINING_LIVES (DISPLAY_WIDTH-REMAINING_LIVES_SIZE)/2
 #define Y_REMAINING_LIVES DISPLAY_HEIGTH-35
+
+// REMAINING LIVES Text in game over screen
+#define X_REMAINING_LIVES_GAMEOVER (DISPLAY_WIDTH-REMAINING_LIVES_SIZE)/2
+#define Y_REMAINING_LIVES_GAMEOVER DISPLAY_CENTER_Y_COORD
 
 // SCORE Text screen positions
 #define X_SCORE 170
@@ -54,9 +60,9 @@
 #define Y_YOU_LOST DISPLAY_CENTER_Y_COORD+20
 
 // GAME PAUSED Text screen positions
-#define gamePauseD_SIZE 11*SINGLE_CHARACTER_SIZE
-#define X_gamePauseD (DISPLAY_WIDTH-gamePauseD_SIZE)/2
-#define Y_gamePauseD DISPLAY_CENTER_Y_COORD-35
+#define GAME_PAUSED_SIZE 11*SINGLE_CHARACTER_SIZE
+#define X_GAME_PAUSED (DISPLAY_WIDTH-GAME_PAUSED_SIZE)/2
+#define Y_GAME_PAUSED DISPLAY_CENTER_Y_COORD-35
 
 // PRESS INT0 Text screen positions
 #define PRESS_INT0_SIZE 10*SINGLE_CHARACTER_SIZE

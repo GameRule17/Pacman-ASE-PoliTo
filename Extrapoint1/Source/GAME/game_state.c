@@ -12,14 +12,14 @@ void checkVictory();
 /* **************************** GLOBAL VARIABLES **************************** */
 
 uint16_t countdown = MAX_TIME_SECONDS;
-uint16_t numLives = INITIAL_numLives;
+uint16_t numLives = INITIAL_NUM_LIVES;
 uint16_t score = 0;
 uint16_t gamePause = 1;
 
 /* ******************** GAME STATE FUNCTIONS ******************** */
 
 void startGame() {
-	drawBoard(1);
+	drawBoard(DRAW_ENTIRE_BOARD);
 	setGamePause();
 }
 
@@ -34,12 +34,12 @@ void removeGamePause() {
 	enable_timer(0);
 	enable_timer(1);
 	gamePause = 0;
-	drawBoard(0);
+	drawBoard(DRAW_BOARD_ONLY_BELOW_PAUSE_BOX);
 }
 
 void restartGame() {
 	clearGameOverScreen();
-	drawBoard(1);
+	drawBoard(DRAW_ENTIRE_BOARD);
 	setGamePause();
 	enableINT0();
 	countdown = MAX_TIME_SECONDS; // Reset countdown statistic

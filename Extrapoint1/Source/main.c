@@ -20,6 +20,12 @@
 **
 *********************************************************************************************************/
 
+/*********************************************************************************************************
+**                                      
+**  EXTRAPOINT N°1 for the course "Architetture dei Sistemi di Elaborazione" A.A. 24/25
+**  Student ID: Natale Mastrogiacomo (s345071)
+**
+*********************************************************************************************************/
 
 
 	/* System Defines */
@@ -69,7 +75,7 @@ int main(void)
 	init_timer(0, 0, 0, 3, 0x17D7840); // 1*25000000=0x17D7840
 	//enable_timer(0);
 	
-		//TIMER1 - PACMAN MOVEMENT TIMER
+		//TIMER1 - PACMAN MOVEMENT and PILLS GENERATION TIMER
 	// Every 100ms pacman moves, if flag movement is set
 	init_timer(1, 0, 0, 3, 0x2625A0); // 0,1*25000000=0x2625A0
 	//enable_timer(1);

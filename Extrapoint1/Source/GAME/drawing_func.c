@@ -36,7 +36,7 @@ void drawWall(uint16_t current_X, uint16_t current_Y, uint16_t color){
 }
 
 void drawPoint(uint16_t current_X, uint16_t current_Y, uint16_t color){
-	LCD_SetPoint(current_X + 4, current_Y + 4, color);
+	LCD_SetPoint(current_X + RATIO/2, current_Y + RATIO/2, color);
 }
 
 void drawCircle(int center_X, int center_Y, int radius, int color){
@@ -127,7 +127,7 @@ void drawLives(uint16_t initialX, uint16_t initialY) {
 	int nextHeartDistance = 16;
 	int i = 0;
 	
-	for(i=0; i<MAX_numLives; i++) {
+	for(i=0; i<MAX_NUM_LIVES; i++) {
 		if (i<numLives) {
 			// For the actual lives a red heart is showed
 			drawHeart(initialX,initialY,7,Red);
@@ -194,12 +194,6 @@ void drawBoard(uint16_t drawAllBoardFlag){
 				case POWER_PILL:
                     drawCircle(x_pos, y_pos, POWER_PILL_RADIUS, Magenta);
 				break;
-//				case TP_LEFT:
-//					  drawWall(x_pos, y_pos, Cyan);
-//				break;
-//				case TP_RIGHT:
-//					  drawWall(x_pos, y_pos, Cyan);
-				break;
 				case PACMAN:
 					drawCircle(x_pos, y_pos, PACMAN_RADIUS, Yellow);
 				break;
@@ -221,10 +215,10 @@ void drawPacmanMove(uint16_t newY, uint16_t newX, uint16_t prevY, uint16_t prevX
 
 void drawGameOverScreen() {
 	LCD_Clear(Black);
-	// x and y were found simply testing different positions in order to look it pretty
+	
 	GUI_Text(X_GAME_OVER,Y_GAME_OVER,(uint8_t *) "GAME OVER", Blue, Black);
 	
-	GUI_Text(X_REMAINING_LIVES,Y_REMAINING_LIVES,(uint8_t *) "REMAINING LIVES", Blue, Black);
+	GUI_Text(X_REMAINING_LIVES_GAMEOVER,Y_REMAINING_LIVES_GAMEOVER,(uint8_t *) "REMAINING LIVES", Blue, Black);
 	drawLives(X_POSITION_LIVES_IN_GAMEOVER, Y_POSITION_LIVES_IN_GAMEOVER);
 	GUI_Text(X_PRESS_KEY1_TO_RESTART,Y_PRESS_KEY1_TO_RESTART,(uint8_t *) "Press KEY1 to Restart", Blue, Black);
 }
@@ -236,7 +230,7 @@ void clearGameOverScreen() {
 
 void drawGameEndedScreen() {
 	LCD_Clear(Black);
-	// x and y were found simply testing different positions in order to look it pretty
+	
 	GUI_Text(X_GAME_OVER, Y_GAME_OVER,(uint8_t *) "GAME OVER", Blue, Black);
 	GUI_Text(X_NO_REMAINING_LIVES, Y_NO_REMAINING_LIVES,(uint8_t *) "NO REMAINING LIVES", Blue, Black);
 	GUI_Text(X_YOU_LOST, Y_YOU_LOST,(uint8_t *) "YOU LOST!", Blue, Black);
@@ -245,13 +239,13 @@ void drawGameEndedScreen() {
 void drawPauseBox() {
 	drawRectWithBorder(64, 104, 112, 88, Black, Red);
 	// x and y were found simply testing different positions in order to look it pretty
-	GUI_Text(X_gamePauseD, Y_gamePauseD,(uint8_t *) "GAME PAUSED", Red, Black);
+	GUI_Text(X_GAME_PAUSED, Y_GAME_PAUSED,(uint8_t *) "GAME PAUSED", Red, Black);
 	GUI_Text(X_PRESS_INT0, Y_PRESS_INT0,(uint8_t *) "Press INT0", Red, Black);
 	GUI_Text(X_TO_RESUME, Y_TO_RESUME,(uint8_t *) "to resume", Red, Black);
 }
 
 void drawVictoryScreen() {
 	LCD_Clear(Black);
-	// x and y were found simply testing different positions in order to look it pretty
+	
 	GUI_Text(X_VICTORY, Y_VICTORY,(uint8_t *) "VICTORY!", Blue, Black);
 }

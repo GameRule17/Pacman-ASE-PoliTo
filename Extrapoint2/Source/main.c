@@ -70,7 +70,7 @@ int main(void)
 	init_timer(0, 0, 0, 3, 0x17D7840); // 1*25000000=0x17D7840
 	//enable_timer(0);
 	
-		//TIMER1 - PACMAN MOVEMENT TIMER
+		//TIMER1 - MOVEMENTS, PILLS GENERATION and CAN TIMER
 	// Every 100ms pacman moves, if flag movement is set
 	init_timer(1, 0, 0, 3, 0x2625A0); // 0,1*25000000=0x2625A0
 	//enable_timer(1);

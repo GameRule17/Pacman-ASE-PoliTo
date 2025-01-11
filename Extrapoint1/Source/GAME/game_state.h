@@ -4,8 +4,8 @@
 #import "GAME/drawing_func.h"
 
 #define MAX_TIME_SECONDS 60
-#define INITIAL_numLives 1
-#define MAX_numLives 3
+#define INITIAL_NUM_LIVES 1
+#define MAX_NUM_LIVES 3
 #define MAX_NUM_PILLS 240
 
 extern uint16_t countdown;
