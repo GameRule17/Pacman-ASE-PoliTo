@@ -19,7 +19,6 @@ uint16_t gamePause = 1;
 uint8_t isBlinkyFreeFlag = 0;
 uint8_t blinkyMode = BLINKY_CHASE_MODE;
 uint8_t timeBlinkyFrightened = 0;
-uint8_t blinkySpeed = BLINKY_INITIAL_SPEED;
 
 /* ******************** GAME STATE FUNCTIONS ******************** */
 void startGame() {

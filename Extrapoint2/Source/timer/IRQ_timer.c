@@ -37,9 +37,6 @@ void TIMER0_IRQHandler (void)
 			}
 		}
 		
-		// Enhance Blinky speed every second
-		blinkySpeed++;
-		
 		LPC_TIM0->IR = 1;			//clear interrupt flag
 	}
 	else if(LPC_TIM0->IR & 2){	// MR1
@@ -72,6 +69,8 @@ void TIMER1_IRQHandler (void)
 		// your code
 		uint16_t threshold;
 		uint8_t theyCollided = 0;
+		static uint32_t blinkyTicksMovementCounter = BLINKY_INITIAL_TICKS_MOVEMENT;
+		static uint32_t initialTicksNumber = BLINKY_INITIAL_TICKS_MOVEMENT;
 		
 		tryGenerationPowerPills();
 		
@@ -79,12 +78,19 @@ void TIMER1_IRQHandler (void)
 			freeBlinkyFromCage();
 		} else {
 			
-			// Make Blinky faster as the game progresses
-			changeSRand();
-			threshold = rand() % 101;
-			if (threshold < blinkySpeed) {
+			// Make Blinky faster and aggressive as the game progresses			
+			if (blinkyTicksMovementCounter == 0) {
 				moveBlinky();
 				theyCollided = checkCollision();
+				
+				if (initialTicksNumber == 1) {
+					blinkyTicksMovementCounter = 1;
+				} else {
+					initialTicksNumber--;
+					blinkyTicksMovementCounter = initialTicksNumber;
+				}
+			} else {
+				blinkyTicksMovementCounter--;
 			}
 		}
 		
@@ -128,7 +134,7 @@ void TIMER2_IRQHandler (void)
 {
 	if(LPC_TIM2->IR & 1) {		// MR0 
 		// your code
-		playMusicSound(); // Background Game Music or Sound Effects
+		//playMusicSound(); // Background Game Music or Sound Effects
 		
 		LPC_TIM2->IR = 1;			//clear interrupt flag
 	}
