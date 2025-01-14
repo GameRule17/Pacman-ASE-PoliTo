@@ -5,8 +5,8 @@
 #import "audio/music.h"
 
 #define MAX_TIME_SECONDS 60
-#define INITIAL_numLives 1
-#define MAX_numLives 4
+#define INITIAL_NUMLIVES 1
+#define MAX_NUMLIVES 4
 #define MAX_NUM_PILLS 240
 
 #define BLINKY_CHASE_MODE 0

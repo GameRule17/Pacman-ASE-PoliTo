@@ -12,7 +12,7 @@ void checkVictory();
 /* **************************** GLOBAL VARIABLES **************************** */
 
 uint16_t countdown = MAX_TIME_SECONDS;
-uint16_t numLives = INITIAL_numLives;
+uint16_t numLives = INITIAL_NUMLIVES;
 uint16_t score = 0;
 uint16_t gamePause = 1;
 

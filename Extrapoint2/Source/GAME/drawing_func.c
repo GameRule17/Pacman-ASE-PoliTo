@@ -127,7 +127,7 @@ void drawLives(uint8_t numLives, uint16_t initialX, uint16_t initialY) {
 	int nextHeartDistance = 16;
 	int i = 0;
 	
-	for(i=0; i<MAX_numLives; i++) {
+	for(i=0; i<MAX_NUMLIVES; i++) {
 		if (i<numLives) {
 			// For the actual lives a red heart is showed
 			drawHeart(initialX,initialY,7,Red);
