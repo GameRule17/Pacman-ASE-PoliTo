@@ -113,8 +113,12 @@ uint16_t movePacman(uint16_t direction) {
 				case POWER_PILL:
 					sumToScore = 50;
 					soundToPlay = SOUND_SUPER_PILL_EATED;
+					
+					// Update Blinky Mode and colour on board
 					blinkyMode = BLINKY_FRIGHTENED_MODE;
+					drawBlinkyMove(blinky_y,blinky_x,blinky_y,blinky_x,BLINKY);
 					timeBlinkyFrightened = 0;
+					
 					flagPillEated = 1;
 				break;
 				default:
