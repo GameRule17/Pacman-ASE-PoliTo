@@ -50,7 +50,12 @@ void sendPlayerStatsUsingCAN(uint16_t countdown, uint8_t numLives, uint16_t scor
 void drawPlayerStatsReceivedByCAN(uint16_t CAN_countdown, uint8_t CAN_numLives, uint16_t CAN_score);
 
 extern CAN_msg       CAN_TxMsg;      /* CAN messge for sending */
-extern CAN_msg       CAN_RxMsg;      /* CAN message for receiving */                                
+extern CAN_msg       CAN_RxMsg;      /* CAN message for receiving */      
+
+/* Flags to check if a single statistic has been updated */
+extern uint8_t scoreChanged;
+extern uint8_t countdownChanged;
+extern uint8_t livesChanged;
 
 #endif // _CAN_H_
 

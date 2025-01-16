@@ -1,5 +1,9 @@
 #include "CAN.h"
 
+uint8_t scoreChanged = 0;
+uint8_t countdownChanged = 0;
+uint8_t livesChanged = 0;
+
 void sendPlayerStatsUsingCAN(uint16_t countdown, uint8_t numLives, uint16_t score) {
 	// Sending player game stats through CAN 
 	// From CAN1 to CAN2
@@ -19,10 +23,20 @@ void drawPlayerStatsReceivedByCAN(uint16_t CAN_countdown, uint8_t CAN_numLives, 
 	uint16_t conv_string[12];
 	
 	if(gamePause == 0) {
-		drawScore(CAN_score);
 		
-		drawTimeLeft(CAN_countdown);
+		if (scoreChanged == 1) {
+			drawScore(CAN_score);
+			scoreChanged = 0;
+		}
 		
-		drawLives(CAN_numLives, X_POSITION_LIVES_IN_GAME, Y_POSITION_LIVES_IN_GAME);
+		if (countdownChanged == 1) {
+			drawTimeLeft(CAN_countdown);
+			countdownChanged = 0;
+		}
+		
+		if (livesChanged == 1) {
+			drawLives(CAN_numLives, X_POSITION_LIVES_IN_GAME, Y_POSITION_LIVES_IN_GAME);
+			livesChanged = 0;
+		}
 	}
 }

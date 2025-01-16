@@ -83,7 +83,7 @@ void TIMER1_IRQHandler (void)
 				moveBlinky();
 				theyCollided = checkCollision();
 				
-				if (initialTicksNumber == 1) {
+				if (initialTicksNumber == 1) { // Blinky will always be a little slower than pacman
 					blinkyTicksMovementCounter = 1;
 				} else {
 					initialTicksNumber--;
@@ -134,7 +134,8 @@ void TIMER2_IRQHandler (void)
 {
 	if(LPC_TIM2->IR & 1) {		// MR0 
 		// your code
-		//playMusicSound(); // Background Game Music or Sound Effects
+		
+		playMusicSound(); // Background Game Music or Sound Effects
 		
 		LPC_TIM2->IR = 1;			//clear interrupt flag
 	}

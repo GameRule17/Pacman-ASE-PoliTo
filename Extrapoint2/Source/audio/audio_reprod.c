@@ -14,7 +14,7 @@ void playMusicSound() {
 	currentValue = SinTable[sineticks];
 	//currentValue -= 410;
 	//currentValue /= 2;
-	currentValue *= 2;
+	currentValue *= 1.3;
 	//currentValue += 410;
 	LPC_DAC->DACR = currentValue <<6;
 	sineticks++;

@@ -33,8 +33,7 @@ volatile int J_click = 0;
 **
 ******************************************************************************/
 void RIT_IRQHandler(void) 
-{			
-		
+{		
 	if(down_0 !=0) {			/* INT0 */
 		down_0++;
 		if((LPC_GPIO2->FIOPIN & (1<<10)) == 0){

@@ -50,6 +50,7 @@ void updateCountdown() {
 	} else {
 		//drawTimeLeft();
 		// This is now done through CAN
+		countdownChanged = 1;
 	}
 }
 
@@ -66,6 +67,7 @@ void removeOneLife() {
 		soundToPlay = SOUND_LIFE_LOSED;
 		//drawLives(X_POSITION_LIVES_IN_GAME, Y_POSITION_LIVES_IN_GAME);
 		// This is now done through CAN
+		livesChanged = 1;
 	}
 }
 
@@ -81,10 +83,12 @@ void updateScore(uint16_t addValue) {
 		//drawLives(X_POSITION_LIVES_IN_GAME, Y_POSITION_LIVES_IN_GAME);
 		// This is now done through CAN
 		threshold = threshold + 1000;
+		livesChanged = 1;
 	}
 	
 	//drawScore();
 	// This is now done through CAN
+	scoreChanged = 1;
 }
 
 void checkVictory() {
