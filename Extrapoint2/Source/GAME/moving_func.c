@@ -168,6 +168,7 @@ void freeBlinkyFromCage() {
 	static int i = -30; // Blinky stays 3 second stopped before exiting the cage
 	switch(i) {
 		case 0:
+			drawBlinkyMove(BLINKY_INITIAL_Y, BLINKY_INITIAL_X, blinky_y, blinky_x, VOID);
 			// Move 1 cell up blinky
 			board[blinky_y][blinky_x] = VOID;
 			board[blinky_y-1][blinky_x] = BLINKY;
@@ -317,7 +318,7 @@ uint8_t checkCollision() {
 		previousBlinkyCellValue = board[CAGE_EXIT_Y][CAGE_EXIT_X];
 		
 		// Draw Pacman and Blinky with new position
-		drawBlinkyMove(BLINKY_INITIAL_Y, BLINKY_INITIAL_X, blinky_y, blinky_x, VOID);
+		//drawBlinkyMove(BLINKY_INITIAL_Y, BLINKY_INITIAL_X, blinky_y, blinky_x, VOID);
 		drawElementOnBoard(pacman_x, pacman_y, PACMAN);
 		
 		if (blinkyMode == BLINKY_CHASE_MODE) {
